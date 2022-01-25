@@ -139,4 +139,8 @@
       <Name>TrincaChurras</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\pattern.png" />
+    <BundleResource Include="Resources\trinca.png" />
+  </ItemGroup>
 </Project>

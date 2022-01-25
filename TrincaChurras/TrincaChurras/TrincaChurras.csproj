@@ -25,6 +25,10 @@
     <None Remove="Resources\" />
     <None Remove="Refit" />
     <None Remove="Xamarin.Forms.PancakeView" />
+    <None Remove="Resources\Fonts\" />
+    <None Remove="Resources\Fonts\Raleway-Bold.ttf" />
+    <None Remove="Resources\Fonts\Raleway-Medium.ttf" />
+    <None Remove="Resources\Fonts\Raleway-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -33,5 +37,11 @@
     <Folder Include="Services\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Resources\" />
+    <Folder Include="Resources\Fonts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\Raleway-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Raleway-Medium.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Raleway-Regular.ttf" />
   </ItemGroup>
 </Project>

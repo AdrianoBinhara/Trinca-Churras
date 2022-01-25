@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#FFD935"
+    NavigationPage.HasNavigationBar="False"
+    x:Class="TrincaChurras.Views.LoginPage">
+    
+    <ContentPage.Content>
+        <Grid BackgroundColor="#FFD935">
+            <Image Source="pattern.png" VerticalOptions="StartAndExpand"/>
+            <FlexLayout AlignItems="Center"
+                        Direction="Column"
+                        JustifyContent="Center">
+                <FlexLayout 
+                    BackgroundColor="Transparent"
+                    AlignItems="Center"
+                    Direction="Column"
+                    FlexLayout.Grow="1"
+                    JustifyContent="Center">
+                        <Label Text="Agenda de Churras"
+                               FontAttributes="Bold"
+                               FontFamily="RalewayBold"
+                               FontSize="Subtitle"
+                               TextColor="Black"/>
+                </FlexLayout>
+
+                <FlexLayout AlignItems="Center"
+                            Direction="Column"
+                            FlexLayout.Grow="1"
+                            Margin="80,0"
+                            JustifyContent="Center">
+                    <Label Text="Login"
+                           TextColor="Black"
+                           FontFamily="RalewayBold"
+                           FlexLayout.AlignSelf="Stretch"
+                           Margin="0,0,0,10"/>
+                    <Entry Placeholder="e-mail"
+                           HeightRequest="40"
+                           FlexLayout.AlignSelf="Stretch"
+                           FontAttributes="Italic"/>
+
+                    <Label Text="Senha"
+                           TextColor="Black"
+                           FontFamily="RalewayBold"
+                           Margin="0,30,0,10"
+                           FlexLayout.AlignSelf="Stretch"/>
+                    <Entry Placeholder="senha"
+                           HeightRequest="40"
+                           FlexLayout.AlignSelf="Stretch"
+                           FontAttributes="Italic"/>
+                </FlexLayout>
+
+                <FlexLayout AlignItems="Center"
+                            Direction="Column"
+                            FlexLayout.Grow="1"
+                            Margin="80,0"
+                            JustifyContent="Center">
+                    <Button CornerRadius="18"
+                            Text="Entrar"
+                            FontFamily="RalewayBold"
+                            Clicked="Button_Clicked"
+                            TextColor="White"
+                            FlexLayout.AlignSelf="Stretch" BackgroundColor="Black"/>
+                </FlexLayout>
+
+                <FlexLayout AlignItems="Center"
+                            Direction="Column"
+                            FlexLayout.Grow="1"
+                            Margin="80,0"
+                            JustifyContent="Center">
+                    <Image Source="trinca.png"/>
+                </FlexLayout>
+              
+            </FlexLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
