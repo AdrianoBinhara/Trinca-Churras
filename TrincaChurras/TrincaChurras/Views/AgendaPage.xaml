@@ -68,7 +68,8 @@
                             Margin="0,160"
                             SelectionMode="Single"
                             HorizontalScrollBarVisibility="Never"
-                            HeightRequest="420"
+                            HeightRequest="422"
+                            ItemsSource="{Binding ListaAgenda}"
                             VerticalOptions="Start"
                             ItemTemplate="{StaticResource TemplateSelector}"
                             HorizontalOptions="Center">

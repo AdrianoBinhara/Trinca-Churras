@@ -16,7 +16,7 @@ namespace TrincaChurras.Helpers.Converters
                 return string.Empty;
 
             var sB = new StringBuilder(5);
-            char[] delimiterChars = { ' ', '-' };
+            char[] delimiterChars = { 'T', '-' };
             var split = data?.Split(delimiterChars);
 
             sB.Append($"{split[1]}/{split[2]}");
