@@ -9,11 +9,14 @@
    
             <StackLayout Margin="13,0,0,0"
                          VerticalOptions="Center"
-                         HeightRequest="170"
+                         HeightRequest="120"
                          WidthRequest="150" Spacing="5"
                          BackgroundColor="#F1F1F1"
                          Padding="10">
-                <Image Source="{Binding Image}" Margin="0,25,0,0" VerticalOptions="Center"/>
+                <Image Source="{Binding Image}"
+                       Margin="0,6,0,0"
+                       HeightRequest="60"
+                       VerticalOptions="Center"/>
                 <Label Text="{Binding Title}"
                        TextColor="Black"
                        VerticalOptions="Start"

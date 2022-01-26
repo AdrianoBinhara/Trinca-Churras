@@ -68,7 +68,9 @@
                             Margin="0,160"
                             SelectionMode="Single"
                             HorizontalScrollBarVisibility="Never"
-                            HeightRequest="422"
+                            HeightRequest="350"
+                            SelectionChangedCommand="{Binding SelectedChurrasCommand}"
+                            SelectionChangedCommandParameter="{x:Reference collectionBarb}"
                             ItemsSource="{Binding ListaAgenda}"
                             VerticalOptions="Start"
                             ItemTemplate="{StaticResource TemplateSelector}"
@@ -81,9 +83,22 @@
                                      Span="2"/>
                 </CollectionView.ItemsLayout>   
             </CollectionView>
+            <ActivityIndicator VerticalOptions="Center" Color="Black"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"/>
+
+             
             <Image Source="trinca.png"
                    VerticalOptions="End"
-                   Margin="0,0,0,40"/>
+                   Margin="0,0,0,200"/>
+            <Button CornerRadius="18"
+                     Text="Adicionar Churras"
+                     FontFamily="RalewayBold"
+                     Command="{Binding LoginCommand}"
+                     TextColor="White"
+                     Margin="13,0,13,50"
+                     VerticalOptions="EndAndExpand"       
+                     BackgroundColor="Black"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

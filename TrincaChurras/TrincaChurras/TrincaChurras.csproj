@@ -33,6 +33,7 @@
     <None Remove="Helpers\Converters\" />
     <None Remove="Views\Template\" />
     <None Remove="Helpers\Util\" />
+    <None Remove="Resources\Fonts\Font-Awesome.otf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -51,5 +52,6 @@
     <EmbeddedResource Include="Resources\Fonts\Raleway-Bold.ttf" />
     <EmbeddedResource Include="Resources\Fonts\Raleway-Medium.ttf" />
     <EmbeddedResource Include="Resources\Fonts\Raleway-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Font-Awesome.otf" />
   </ItemGroup>
 </Project>

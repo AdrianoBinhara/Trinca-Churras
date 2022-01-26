@@ -8,11 +8,14 @@
     BackgroundColor="Transparent">
    <pancake:PancakeView >
         <pancake:PancakeView.Shadow>
-            <pancake:DropShadow Color="Black"  Offset="10,7" Opacity=".1" BlurRadius="8"/>
+            <pancake:DropShadow Color="Black"
+                                Offset="10,7"
+                                Opacity=".1"
+                                BlurRadius="8"/>
         </pancake:PancakeView.Shadow>
         <StackLayout Margin="13,0,0,0"
                      VerticalOptions="Center"
-                     HeightRequest="170"
+                     HeightRequest="120"
                      WidthRequest="150"
                      BackgroundColor="White"
                      Padding="10">
@@ -20,7 +23,37 @@
                    TextColor="Black"
                    FontSize="Subtitle"
                    FontFamily="RalewayBold"/>
-            <Label Text="{Binding Title}" TextColor="Black" FontFamily="RalewayBold"/>
+            <Label Text="{Binding Title}"
+                   TextColor="Black"
+                   FontFamily="RalewayBold"/>
+            <StackLayout Orientation="Horizontal"
+                         Margin="0,0,0,10"
+                         VerticalOptions="EndAndExpand"
+                         BackgroundColor="Transparent">
+                <StackLayout Orientation="Horizontal"
+                             Spacing="10"
+                             HorizontalOptions="FillAndExpand"
+                             BackgroundColor="Transparent">
+                    <Image Source="icon_people.png"
+                           HorizontalOptions="Start"
+                           HeightRequest="15"/>
+                    <Label Text="{Binding Participants_count}"
+                           TextColor="Black"
+                           FontSize="Large"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalTextAlignment="Start"
+                           FontFamily="RalewayRegular"/>
+              
+                    <Image Source="icon_money.png"
+                           HorizontalOptions="End"
+                           HeightRequest="15"/>
+                    <Label Text="{Binding TotalValue}"
+                           TextColor="Black"
+                           FontSize="Medium"
+                           VerticalTextAlignment="Start"
+                           FontFamily="RalewayRegular"/>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
    </pancake:PancakeView>
 </Grid>

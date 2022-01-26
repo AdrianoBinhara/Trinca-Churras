@@ -7,6 +7,13 @@ namespace TrincaChurras.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        private bool _isBusy = false;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set { SetProperty(ref _isBusy, value); }
+        }
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

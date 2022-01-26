@@ -37,6 +37,8 @@
                            Margin="0,0,0,10"/>
                     <Entry Placeholder="e-mail"
                            HeightRequest="40"
+                           Text="{Binding Username}"
+                           TextTransform="None"
                            FlexLayout.AlignSelf="Stretch"
                            FontAttributes="Italic"/>
 
@@ -47,6 +49,7 @@
                            FlexLayout.AlignSelf="Stretch"/>
                     <Entry Placeholder="senha"
                            HeightRequest="40"
+                           Text="{Binding Password}"
                            FlexLayout.AlignSelf="Stretch"
                            FontAttributes="Italic"/>
                 </FlexLayout>
@@ -61,7 +64,15 @@
                             FontFamily="RalewayBold"
                             Command="{Binding LoginCommand}"
                             TextColor="White"
-                            FlexLayout.AlignSelf="Stretch" BackgroundColor="Black"/>
+                            FlexLayout.AlignSelf="Stretch" BackgroundColor="Black">
+                        <Button.Triggers>
+                           <DataTrigger TargetType="Button"
+                                        Binding="{Binding IsBusy}"
+                                        Value="True">
+                               <Setter Property="IsEnabled" Value="False"/>
+                           </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
                 </FlexLayout>
 
                 <FlexLayout AlignItems="Center"
@@ -73,6 +84,12 @@
                 </FlexLayout>
               
             </FlexLayout>
+            <ActivityIndicator
+                x:Name="actv"
+                VerticalOptions="Center"
+                Margin="0,50,0,0"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

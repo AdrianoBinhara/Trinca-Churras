@@ -10,5 +10,11 @@ namespace TrincaChurras.Interfaces
     {
         [Get("/bbq/?paginated=false")]
         Task<OperationDataResult<List<Barbecue>>> GetBarbecue([Header("Authorization")] string authorization);
+
+        [Post("/bbq/auth")]
+        Task<TokenResponse> PostUser([Body] object user);
+
+        [Get("/bbq/{id}")]
+        Task<Barbecue> GetBarbecueById(string id,[Header("Authorization")] string authorization);
     }
 }
