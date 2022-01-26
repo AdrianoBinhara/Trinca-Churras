@@ -32,6 +32,7 @@
     <None Remove="Helpers\" />
     <None Remove="Helpers\Converters\" />
     <None Remove="Views\Template\" />
+    <None Remove="Helpers\Util\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -44,6 +45,7 @@
     <Folder Include="Helpers\" />
     <Folder Include="Helpers\Converters\" />
     <Folder Include="Views\Templates\" />
+    <Folder Include="Helpers\Util\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\Raleway-Bold.ttf" />
