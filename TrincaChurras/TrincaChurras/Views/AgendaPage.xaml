@@ -2,9 +2,56 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     NavigationPage.HasNavigationBar="False"
     x:Class="TrincaChurras.Views.AgendaPage">
-    <ContentPage.Content>
-        
+
+   <ContentPage.Content>
+        <Grid BackgroundColor="White">
+            <Image BackgroundColor="#FFD935" Source="bbq-pattern.png" VerticalOptions="StartAndExpand"/>
+            <Label Text="Agenda de Churras"
+                   TextColor="Black"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   FontFamily="RalewayBold"
+                   FontSize="Subtitle"
+                   Margin="0,90"/>  
+
+            <CollectionView x:Name="collectionBarb"
+                            Margin="0,160"
+                            HorizontalScrollBarVisibility="Never"
+                            HeightRequest="420"
+                            VerticalOptions="Start"
+                            HorizontalOptions="Center">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal"
+                                     VerticalItemSpacing="0"
+                                     HorizontalItemSpacing="10"
+                                     SnapPointsType="Mandatory"
+                                     Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0,0,0,25"  BackgroundColor="Transparent"  >
+                            <pancake:PancakeView >
+                        <pancake:PancakeView.Shadow>
+                            <pancake:DropShadow Color="Black"  Offset="10,7" Opacity=".1" BlurRadius="8"/>
+                        </pancake:PancakeView.Shadow>
+                            <StackLayout Margin="13,0,0,0"
+                                         VerticalOptions="Center"
+                                         HeightRequest="170"
+                                         WidthRequest="150"
+                                         BackgroundColor="White"
+                                         Padding="10">
+                                <Label Text="{Binding Date, Converter={StaticResource DataConverter}}" TextColor="Black" FontFamily="RalewayBold"/>
+                                <Label Text="{Binding Title}" TextColor="Black" FontFamily="RalewayRegular"/>
+                                <Image Source="{Binding Image}"/>
+                            </StackLayout>
+                        </pancake:PancakeView>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>      
+            </CollectionView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

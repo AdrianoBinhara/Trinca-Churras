@@ -142,5 +142,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\pattern.png" />
     <BundleResource Include="Resources\trinca.png" />
+    <BundleResource Include="Resources\bbq-pattern.png" />
   </ItemGroup>
 </Project>

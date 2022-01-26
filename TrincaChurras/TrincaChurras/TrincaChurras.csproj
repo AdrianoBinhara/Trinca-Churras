@@ -29,6 +29,9 @@
     <None Remove="Resources\Fonts\Raleway-Bold.ttf" />
     <None Remove="Resources\Fonts\Raleway-Medium.ttf" />
     <None Remove="Resources\Fonts\Raleway-Regular.ttf" />
+    <None Remove="Helpers\" />
+    <None Remove="Helpers\Converters\" />
+    <None Remove="Views\Template\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -38,6 +41,9 @@
     <Folder Include="Interfaces\" />
     <Folder Include="Resources\" />
     <Folder Include="Resources\Fonts\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Helpers\Converters\" />
+    <Folder Include="Views\Templates\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\Raleway-Bold.ttf" />
