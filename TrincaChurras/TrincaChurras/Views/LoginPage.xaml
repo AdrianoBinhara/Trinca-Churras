@@ -59,7 +59,7 @@
                     <Button CornerRadius="18"
                             Text="Entrar"
                             FontFamily="RalewayBold"
-                            Clicked="Button_Clicked"
+                            Command="{Binding LoginCommand}"
                             TextColor="White"
                             FlexLayout.AlignSelf="Stretch" BackgroundColor="Black"/>
                 </FlexLayout>

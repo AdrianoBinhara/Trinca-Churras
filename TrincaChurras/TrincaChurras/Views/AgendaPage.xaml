@@ -6,6 +6,38 @@
     xmlns:template="clr-namespace:TrincaChurras.Views.Templates"
     x:Class="TrincaChurras.Views.AgendaPage">
     <ContentPage.Resources>
+        <Style TargetType="template:AddBarbecue">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <Style TargetType="template:AgendaList">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="White" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
         <ResourceDictionary>
             <DataTemplate x:Key="BarbecueTemplate">
                 <template:AgendaList/>
@@ -34,6 +66,7 @@
 
             <CollectionView x:Name="collectionBarb"
                             Margin="0,160"
+                            SelectionMode="Single"
                             HorizontalScrollBarVisibility="Never"
                             HeightRequest="420"
                             VerticalOptions="Start"
@@ -49,7 +82,7 @@
             </CollectionView>
             <Image Source="trinca.png"
                    VerticalOptions="End"
-                   Margin="0,0,0,50"/>
+                   Margin="0,0,0,40"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

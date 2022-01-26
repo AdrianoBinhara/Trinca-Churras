@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using TrincaChurras.ViewModels;
 using Xamarin.Forms;
 
 namespace TrincaChurras.Views
@@ -10,11 +10,7 @@ namespace TrincaChurras.Views
         public LoginPage()
         {
             InitializeComponent();
-        }
-
-        void Button_Clicked(System.Object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new AgendaPage());
+            BindingContext = new LoginViewModel(Navigation);
         }
     }
 }
