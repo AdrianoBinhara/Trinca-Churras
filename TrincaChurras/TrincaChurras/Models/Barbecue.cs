@@ -9,5 +9,6 @@ namespace TrincaChurras.Models
         public string Date { get; set; }
         public double Value_per_person { get; set; }
         public int Participants_count { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Class="TrincaChurras.Views.Templates.AddBarbecue"
+    Padding="0,0,0,25"
+    BackgroundColor="Transparent">
+   
+            <StackLayout Margin="13,0,0,0"
+                         VerticalOptions="Center"
+                         HeightRequest="170"
+                         WidthRequest="150" Spacing="5"
+                         BackgroundColor="#F1F1F1"
+                         Padding="10">
+                <Image Source="{Binding Image}" Margin="0,25,0,0" VerticalOptions="Center"/>
+                <Label Text="{Binding Title}"
+                       TextColor="Black"
+                       VerticalOptions="Start"
+                       FontFamily="RalewayBold"/>
+            </StackLayout>
+</Grid>

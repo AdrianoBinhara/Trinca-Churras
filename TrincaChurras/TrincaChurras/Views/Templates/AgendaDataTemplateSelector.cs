@@ -1,4 +1,5 @@
 ﻿using System;
+using TrincaChurras.Models;
 using Xamarin.Forms;
 
 namespace TrincaChurras.Views.Templates
@@ -10,10 +11,8 @@ namespace TrincaChurras.Views.Templates
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            if (item.ToString().Contains("Adicionar Churras"))
-                return AddBarbecueTemplate;
-
-            return BarbecueTemplate;
+            var bbq = (Barbecue)item;
+            return bbq.Title == "Adicionar Churras" ? AddBarbecueTemplate : BarbecueTemplate;
         }
     }
 }

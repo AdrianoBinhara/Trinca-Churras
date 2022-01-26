@@ -45,7 +45,7 @@ namespace TrincaChurras.Views
                     Participants_count = 18
                 }
             };
-            BarbecueList.Insert(BarbecueList.Count , new AddBarbecue { Title = "Adicionar item ", Image = "trinca.png", });
+            BarbecueList.Insert(BarbecueList.Count , new Barbecue { Title = "Adicionar Churras", Image = "icon_bbq.png", });
             collectionBarb.ItemsSource = BarbecueList;  
         }
     }

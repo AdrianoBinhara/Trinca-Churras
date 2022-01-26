@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    x:Class="TrincaChurras.Views.Templates.AgendaList"
+    Padding="0,0,0,25"
+    BackgroundColor="Transparent">
+   <pancake:PancakeView >
+        <pancake:PancakeView.Shadow>
+            <pancake:DropShadow Color="Black"  Offset="10,7" Opacity=".1" BlurRadius="8"/>
+        </pancake:PancakeView.Shadow>
+        <StackLayout Margin="13,0,0,0"
+                     VerticalOptions="Center"
+                     HeightRequest="170"
+                     WidthRequest="150"
+                     BackgroundColor="White"
+                     Padding="10">
+            <Label Text="{Binding Date, Converter={StaticResource DataConverter}}"
+                   TextColor="Black"
+                   FontSize="Subtitle"
+                   FontFamily="RalewayBold"/>
+            <Label Text="{Binding Title}" TextColor="Black" FontFamily="RalewayBold"/>
+        </StackLayout>
+   </pancake:PancakeView>
+</Grid>
