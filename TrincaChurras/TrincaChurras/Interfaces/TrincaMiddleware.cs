@@ -65,5 +65,26 @@ namespace TrincaChurras.Interfaces
                 };
             }
         }
+
+        public async Task<OperationDataResult<OperationResult>> PutParticipant(Person user, string token)
+        {
+            try
+            {
+                var response = await Api.PutParticipant(user, token);
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = response.Message,
+                    Sucess = true
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = ex.Message,
+                    Sucess = false
+                };
+            }
+        }
     }
 }

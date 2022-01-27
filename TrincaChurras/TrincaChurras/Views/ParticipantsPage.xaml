@@ -37,7 +37,7 @@
                 </pancake:PancakeView.Shadow>
                     <Grid VerticalOptions="FillAndExpand"
                           Padding="20"
-                          ColumnDefinitions="3*,*"
+                          ColumnDefinitions="3*,Auto"
                           RowDefinitions="Auto,Auto,Auto"
                           BackgroundColor="White">
 
@@ -65,7 +65,7 @@
                                      Grid.Column="1">
                             <Image Source="icon_money.png"
                                 HeightRequest="15"/>
-                            <Label Text="{Binding TotalValue, StringFormat='R${0:F1}'}"
+                            <Label Text="{Binding TotalValue, StringFormat='R${0:F2}'}"
                                    Grid.Row="1"
                                    Grid.Column="1"
                                    VerticalTextAlignment="Center"
@@ -74,35 +74,59 @@
                                    TextColor="Black"/>
                         </StackLayout>
 
-                        <CollectionView Grid.ColumnSpan="2"
-                                        Margin="0,20,0,0"
-                                        ItemsSource="{Binding ParticipantsList}"
-                                        Grid.Row="2">
+                        <CollectionView
+                            x:Name="collectionParticipants"
+                            Grid.ColumnSpan="2"
+                            Margin="0,20,0,0"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding SelectedItemCommand}"
+                            SelectionChangedCommandParameter="{x:Reference collectionParticipants}"
+                            SelectionChanged="collectionParticipants_SelectionChanged"
+                            ItemsSource="{Binding ParticipantsList}"
+                            Grid.Row="2">
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout BackgroundColor="White">
-                                        <Grid ColumnDefinitions="3*,*" BackgroundColor="White">
+                                        <Grid ColumnDefinitions="3*,Auto" HeightRequest="50" BackgroundColor="White">
                                             <StackLayout Spacing="0" Orientation="Horizontal" BackgroundColor="White">
-                                                <CheckBox WidthRequest="32" Color="#FFD836"/>
+                                                <CheckBox
+                                                    WidthRequest="32" x:Name="check"
+                                                    IsChecked="{Binding Confirmed}"
+                                                    IsEnabled="False"   
+                                                    Color="#FFD836"/>
                                                 <Label TextColor="Black"
                                                        VerticalTextAlignment="Center"
                                                        FontFamily="RalewayRegular"
                                                        Text="{Binding Name}"/>
                                             </StackLayout>
-                                            <Label TextColor="Black"
-                                                   VerticalTextAlignment="Center"
-                                                   Grid.Column="1"
-                                                   FontFamily="RalewayBold">
-                                                <Label.FormattedText>
-                                                    <FormattedString>
-                                                        <Span Text="R$"/>
-                                                        <Span Text="{Binding Value_paid, StringFormat='{0:F2}'}"/>
-                                                    </FormattedString>
-                                                </Label.FormattedText>
-                                            </Label>
+                                            <Grid Grid.Column="1">
+                                                <Label TextColor="Black"
+                                                       VerticalTextAlignment="Center"
+                                                       FontFamily="RalewayBold">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="R$"/>
+                                                            <Span Text="{Binding Value_paid, StringFormat='{0:F2}'}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <BoxView    
+                                                    x:Name="boxBlack"
+                                                    HeightRequest="1"
+                                                    IsVisible="False"
+                                                    VerticalOptions="Center"
+                                                    Color="Black" >
+                                                    <BoxView.Triggers>
+                                                        <DataTrigger TargetType="BoxView" Binding="{Binding Source={x:Reference check}, Path=IsChecked}"
+                                                                     Value="True">
+                                                            <Setter Property="IsVisible" Value="True"/>
+                                                        </DataTrigger>
+                                                    </BoxView.Triggers>
+                                                </BoxView>
+                                            </Grid>
                                         </Grid>
                                         <BoxView HeightRequest="1"
                                                  HorizontalOptions="FillAndExpand"
@@ -114,10 +138,91 @@
                         </CollectionView>
                     </Grid>
             </pancake:PancakeView>
-
             <Image Source="trinca.png"
                    VerticalOptions="End"
                    Margin="0,0,0,30"/>
+
+
+            <!-- backdrop-->
+            <BoxView Color="#4B000000"
+                     Opacity="0"
+                     InputTransparent="True"
+                     x:Name="Backdrop">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
+            <!-- Bottom Drawer-->
+            <Frame x:Name="BottomDrawer"
+                   HeightRequest="300"
+                   VerticalOptions="End"
+                   WidthRequest="300"
+                   HasShadow="False"
+                   TranslationY="360"
+                   BackgroundColor="White"
+                   CornerRadius="20">
+                <Frame.GestureRecognizers>
+                    <PanGestureRecognizer
+                        PanUpdated="PanGestureRecognizer_PanUpdated"/>
+                </Frame.GestureRecognizers>
+
+                <StackLayout Padding="5">
+                    <BoxView CornerRadius="2" HeightRequest="3"
+                             BackgroundColor="LightGray"
+                             Margin="0,0,0,5"
+                             HorizontalOptions="Center"/>
+                    <Entry
+                        x:Name="entryNameDrawer"
+                        Placeholder="Name"
+                        FontAttributes="Italic"
+                        TextColor="Black"
+                        FontFamily="RalewayRegular"
+                        Text="{Binding Name}"/>
+
+                    <StackLayout
+                        Orientation="Horizontal"
+                        BackgroundColor="White">
+                        <CheckBox
+                            x:Name="checkDrawer"
+                            WidthRequest="32"
+                            IsChecked="{Binding IsPresent}"
+                            Color="#FFD836"/>
+                        <Label
+                            Text="Confirmado"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center"
+                            FontFamily="RalewayRegular"/>
+
+                        <Entry
+                            x:Name="entryValueDrawer"
+                            HorizontalOptions="EndAndExpand"
+                            FontFamily="RalewayRegular"
+                            Placeholder="Valor Pago"
+                            WidthRequest="150"
+                            Keyboard="Numeric"
+                            FontAttributes="Italic"
+                            Text="{Binding PaidValue}"
+                            TextColor="Black"/>
+                    </StackLayout>
+
+                    <ActivityIndicator
+                        x:Name="actv"
+                        IsVisible="{Binding IsBusy}"
+                        IsRunning="{Binding IsBusy}"/>   
+
+                    <Button CornerRadius="18"
+                            VerticalOptions="EndAndExpand"
+                            Margin="0,0,0,70"
+                            Text="Salvar"
+                            FontFamily="RalewayBold"
+                            Clicked="Button_Clicked"
+                            Command="{Binding SaveParticipantCommand}"
+                            TextColor="White"
+                            BackgroundColor="Black"/>
+
+                </StackLayout>
+            </Frame>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TrincaChurras.Interfaces;
@@ -50,35 +51,105 @@ namespace TrincaChurras.ViewModels
             }
         }
 
+        private string token;
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                SetProperty(ref _name, value);
+            }
+        }
+
+        private double _paidValue;
+        public double PaidValue
+        {
+            get { return _paidValue; }
+            set
+            {
+                SetProperty(ref _paidValue, value);
+            }
+        }
+
+        private bool _isPresent;
+        public bool IsPresent
+        {
+            get { return _isPresent; }
+            set
+            {
+                SetProperty(ref _isPresent, value);
+            }
+        }
+
+        public Person Participant { get; private set; }
+        public string ChurrasId { get; private set; }
+
 
         public ParticipantsViewModel(INavigation navigation, string churrasId)
         {
             _navigation = navigation;
-
+            ChurrasId = churrasId;
             Task.Run(async () =>
             {
-                await GetBarbecue(churrasId);
+                await GetBarbecue();
             });
 
             BackCommand = new Command(async () => await NavigateBackAsync());
+            SelectedItemCommand = new Command<CollectionView>( (collection) =>  SelectedItemAsync(collection));
+            SaveParticipantCommand = new Command(async () => await SaveParticipantAsync());
         }
 
         public ICommand BackCommand { get; set; }
+        public ICommand SelectedItemCommand { get; set; }
+        public ICommand SaveParticipantCommand { get; set; }
 
-        private async Task GetBarbecue(string churrasId)
+
+        private async Task GetBarbecue()
         {
-            var token    = await SecureStorage.GetAsync("token");
+            TotalValue = 0;
+            token = await SecureStorage.GetAsync("token");
 
-            var response = await trincaMiddleware.GetBarbecueById(churrasId, token);
+            var response = await trincaMiddleware.GetBarbecueById(ChurrasId, token);
 
             Churras = response.Data;
-            ParticipantsList = new ObservableCollection<Person>(response.Data.Participants);
+            ParticipantsList = new ObservableCollection<Person>(response.Data.Participants.OrderBy(x=>x.Name).ToList());
             TotalParticipants = Churras.Participants.Count;
 
             foreach (var item in Churras.Participants)
             {
                 TotalValue += item.Value_paid;
             }
+        }
+
+        private async Task SaveParticipantAsync()
+        {
+            IsBusy = !IsBusy;
+            Person person = new Person
+            {
+                Id = Participant.Id,
+                Bbq_id = Churras.Id,
+                Name = this.Name,
+                Value_paid = this.PaidValue,
+                Confirmed = this.IsPresent
+            };
+            await trincaMiddleware.PutParticipant(person, token);
+            
+            await GetBarbecue();
+            IsBusy = !IsBusy;
+        }
+
+        private void SelectedItemAsync(CollectionView collection)
+        {
+            var selected =(Person)collection.SelectedItem;
+
+            if (selected == null)
+                return;
+
+            Participant = selected;
+            Name = Participant.Name;
+            PaidValue = Participant.Value_paid;
+            IsPresent = Participant.Confirmed;
         }
 
         private async Task NavigateBackAsync()

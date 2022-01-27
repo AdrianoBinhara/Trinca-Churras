@@ -90,15 +90,8 @@
              
             <Image Source="trinca.png"
                    VerticalOptions="End"
-                   Margin="0,0,0,200"/>
-            <Button CornerRadius="18"
-                     Text="Adicionar Churras"
-                     FontFamily="RalewayBold"
-                     Command="{Binding LoginCommand}"
-                     TextColor="White"
-                     Margin="13,0,13,50"
-                     VerticalOptions="EndAndExpand"       
-                     BackgroundColor="Black"/>
+                   Margin="0,0,0,90"/>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -16,5 +16,8 @@ namespace TrincaChurras.Interfaces
 
         [Get("/bbq/{id}")]
         Task<Barbecue> GetBarbecueById(string id,[Header("Authorization")] string authorization);
+
+        [Put("/bbq/participant")]
+        Task<OperationResult> PutParticipant([Body] Person user, [Header("Authorization")] string authotization);
     }
 }
