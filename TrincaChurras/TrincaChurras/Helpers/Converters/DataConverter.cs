@@ -19,7 +19,7 @@ namespace TrincaChurras.Helpers.Converters
             char[] delimiterChars = { 'T', '-' };
             var split = data?.Split(delimiterChars);
 
-            sB.Append($"{split[1]}/{split[2]}");
+            sB.Append($"{split[2]}/{split[1]}");
 
             return sB;
         }

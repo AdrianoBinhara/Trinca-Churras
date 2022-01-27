@@ -27,21 +27,29 @@ namespace TrincaChurras.ViewModels
             _navigation = navigation;
 
             SelectedChurrasCommand = new Command<CollectionView>(async (churras) => await SelectChurrasAsync(churras));
+            SubscribeMessagingCenter();
+        }
 
-            Task.Run(async () =>
+        public ICommand SelectedChurrasCommand { get; set; }
+
+        private void SubscribeMessagingCenter()
+        {
+            MessagingCenter.Subscribe<Page>(this, "UpdateList", async (sender) =>
             {
                 await LoadItem();
             });
         }
-
-        public ICommand SelectedChurrasCommand { get; set; }
 
         private async Task SelectChurrasAsync(CollectionView churras)
         {
             if(churras.SelectedItem != null)
             {
                 var selectedChurras = churras.SelectedItem as Barbecue;
-                await _navigation.PushAsync(new ParticipantsPage(selectedChurras.Id));
+                if (selectedChurras.Title == "Adicionar Churras")
+                    await _navigation.PushAsync(new AddBarbecuePage());
+                else
+                    await _navigation.PushAsync(new ParticipantsPage(selectedChurras.Id));
+
                 churras.SelectedItem = null;
             }
         }

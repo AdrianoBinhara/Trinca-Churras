@@ -2,9 +2,9 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TrincaChurras.Views.AddBarbecuePage"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    NavigationPage.HasNavigationBar="False"
-    x:Class="TrincaChurras.Views.ParticipantsPage">
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid BackgroundColor="#F9F9F9">
             <Image BackgroundColor="#FFD935"
@@ -18,18 +18,18 @@
                         BackgroundColor="Transparent"
                         FontSize="Large"
                         FontFamily="FontAwesome"
-                        Command="{Binding BackCommand}"
+                        Command="{Binding BackButtonCommand}"
                         TextColor="Black"
                         VerticalOptions="CenterAndExpand"
                         HorizontalOptions="Start"/>
 
                 <Label HorizontalOptions="CenterAndExpand"
-                       Text="Agenda de Churras"
+                       Text="Adicionar de Churras"
                        FontSize="Subtitle"
                        VerticalTextAlignment="Center"
                        TextColor="Black" FontFamily="RalewayBold"/>
                 <ActivityIndicator
-                        x:Name="actv"
+                        x:Name="activityIndicator"
                         Margin="0,0,20,0"
                     HorizontalOptions="EndAndExpand"
                         IsVisible="{Binding IsBusy}"
@@ -44,16 +44,23 @@
                 </pancake:PancakeView.Shadow>
                     <Grid VerticalOptions="FillAndExpand"
                           Padding="20"
-                          ColumnDefinitions="3*,Auto, Auto"
+                          ColumnDefinitions="3*,Auto,Auto"
                           RowDefinitions="Auto,Auto,Auto"
                           BackgroundColor="White">
 
-                        <Label Text="{Binding Churras.Date, Converter={StaticResource DataConverter}}"
+                        <DatePicker
+                            Date="{Binding Date}"
+                            MinimumDate="01/01/2022"
                                FontFamily="RalewayBold"
                                FontSize="Medium"
+                            HorizontalOptions="Start"
                                TextColor="Black"/>
-                        <Label Text="{Binding Churras.Title}"
+                        <Entry Text="{Binding Title}"
                                Grid.Row="1"
+                               WidthRequest="230"
+                               HorizontalOptions="Start"
+                               Placeholder="Titulo"
+                               FontAttributes="Italic"
                                FontFamily="RalewayBold"
                                FontSize="Large"
                                TextColor="Black"/>
@@ -72,9 +79,11 @@
                                      Grid.Column="1">
                             <Image Source="icon_money.png"
                                 HeightRequest="15"/>
-                            <Label Text="{Binding TotalValue, StringFormat='R${0:F2}'}"
+                            <Entry Text="{Binding ValuePerPeson}"
                                    Grid.Row="1"
                                    Grid.Column="1"
+                                   Placeholder="Valor"
+                                   Keyboard="Numeric"
                                    VerticalTextAlignment="Center"
                                    FontFamily="RalewayRegular"
                                    FontSize="Medium"
@@ -90,13 +99,13 @@
                                 Command="{Binding AddPariticipantsCommand}"/>
 
                         <CollectionView
-                            x:Name="collectionParticipants"
+                            x:Name="CVParticipants"
                             Grid.ColumnSpan="2"
                             Margin="0,20,0,0"
                             VerticalScrollBarVisibility="Never"
                             SelectionMode="Single"
                             SelectionChangedCommand="{Binding SelectedItemCommand}"
-                            SelectionChangedCommandParameter="{x:Reference collectionParticipants}"
+                            SelectionChangedCommandParameter="{x:Reference CVParticipants}"
                             SelectionChanged="collectionParticipants_SelectionChanged"
                             ItemsSource="{Binding ParticipantsList}"
                             Grid.Row="3">
@@ -158,8 +167,6 @@
                    VerticalOptions="End"
                    Margin="0,0,0,30"/>
 
-
-            <!-- backdrop-->
             <BoxView Color="#4B000000"
                      Opacity="0"
                      InputTransparent="True"
@@ -168,8 +175,9 @@
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                 </BoxView.GestureRecognizers>
             </BoxView>
+
             <!-- Bottom Drawer-->
-            <Frame x:Name="BottomDrawer"
+            <Frame x:Name="FrameDrawer"
                    HeightRequest="300"
                    VerticalOptions="End"
                    WidthRequest="300"
@@ -188,7 +196,7 @@
                              Margin="0,0,0,5"
                              HorizontalOptions="Center"/>
                     <Entry
-                        x:Name="entryNameDrawer"
+                        x:Name="entryDrawer"
                         Placeholder="Name"
                         FontAttributes="Italic"
                         TextColor="Black"
@@ -199,7 +207,7 @@
                         Orientation="Horizontal"
                         BackgroundColor="White">
                         <CheckBox
-                            x:Name="checkDrawer"
+                            x:Name="checkboxDrawer"
                             WidthRequest="32"
                             IsChecked="{Binding IsPresent}"
                             Color="#FFD836"/>
@@ -210,7 +218,7 @@
                             FontFamily="RalewayRegular"/>
 
                         <Entry
-                            x:Name="entryValueDrawer"
+                            x:Name="valueDrawer"
                             HorizontalOptions="EndAndExpand"
                             FontFamily="RalewayRegular"
                             Placeholder="Valor Pago"
@@ -233,7 +241,6 @@
 
                 </StackLayout>
             </Frame>
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

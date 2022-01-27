@@ -1,41 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TrincaChurras.Models;
 using TrincaChurras.ViewModels;
 using Xamarin.Forms;
 
 namespace TrincaChurras.Views
 {
-    public partial class ParticipantsPage : ContentPage
+    public partial class AddBarbecuePage : ContentPage
     {
         uint duration = 100;
         double openY = (Device.RuntimePlatform == "Android") ? 20 : 60;
         bool isBackdropEnabled = true;
 
         public double lastPanY { get; private set; }
-    
-        public ParticipantsPage(string id)
+
+        public AddBarbecuePage()
         {
             InitializeComponent();
-            BindingContext = new ParticipantsViewModel(Navigation, id);
+            BindingContext = new AddBarbecueViewModel(Navigation);
         }
 
         void PanGestureRecognizer_PanUpdated(System.Object sender, Xamarin.Forms.PanUpdatedEventArgs e)
         {
-            if(e.StatusType == GestureStatus.Running)
+            if (e.StatusType == GestureStatus.Running)
             {
                 isBackdropEnabled = false;
                 lastPanY = e.TotalY;
 
-                if(e.TotalY>0)
+                if (e.TotalY > 0)
                 {
-                    BottomDrawer.TranslationY = openY + e.TotalY;
+                    FrameDrawer.TranslationY = openY + e.TotalY;
                 }
             }
-            else if(e.StatusType == GestureStatus.Completed)
+            else if (e.StatusType == GestureStatus.Completed)
             {
-                if(lastPanY < 110)
+                if (lastPanY < 110)
                 {
                     Task.Run(async () =>
                     {
@@ -60,7 +59,7 @@ namespace TrincaChurras.Views
                 {
                     await CloseDrawer();
                 });
-                        
+
         }
 
         void collectionParticipants_SelectionChanged(System.Object sender, Xamarin.Forms.SelectionChangedEventArgs e)
@@ -88,7 +87,7 @@ namespace TrincaChurras.Views
             await Task.WhenAll
             (
                 Backdrop.FadeTo(1, length: duration),
-                BottomDrawer.TranslateTo(0, openY, length: duration, easing: Easing.SinIn)
+                FrameDrawer.TranslateTo(0, openY, length: duration, easing: Easing.SinIn)
             );
             Backdrop.InputTransparent = false;
         }
@@ -98,7 +97,7 @@ namespace TrincaChurras.Views
             await Task.WhenAll
             (
                 Backdrop.FadeTo(0, length: duration),
-                BottomDrawer.TranslateTo(0, 440, length: duration, easing: Easing.SinIn)
+                FrameDrawer.TranslateTo(0, 440, length: duration, easing: Easing.SinIn)
             );
             Backdrop.InputTransparent = false;
         }
@@ -110,6 +109,5 @@ namespace TrincaChurras.Views
                 await CloseDrawer();
             });
         }
-
     }
 }

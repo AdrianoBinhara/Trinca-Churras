@@ -13,5 +13,16 @@ namespace TrincaChurras.Views
             InitializeComponent();
             BindingContext = new AgendaViewModel(Navigation);
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            MessagingCenter.Send<Page>(this, "UpdateList");
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            MessagingCenter.Unsubscribe<Page>(this, "UpdateList");
+        }
     }
 }

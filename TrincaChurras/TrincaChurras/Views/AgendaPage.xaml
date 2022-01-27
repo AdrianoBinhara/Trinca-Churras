@@ -56,13 +56,22 @@
    <ContentPage.Content>
         <Grid BackgroundColor="White">
             <Image BackgroundColor="#FFD935" Source="bbq-pattern.png" VerticalOptions="StartAndExpand"/>
-            <Label Text="Agenda de Churras"
-                   TextColor="Black"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Start"
-                   FontFamily="RalewayBold"
-                   FontSize="Subtitle"
-                   Margin="0,90"/>  
+             <Grid Margin="0,80"
+                  VerticalOptions="Start">
+
+                <Label HorizontalOptions="CenterAndExpand"
+                       Text="Agenda de Churras"
+                       FontSize="Subtitle"
+                       VerticalTextAlignment="Center"
+                       TextColor="Black" FontFamily="RalewayBold"/>
+                <ActivityIndicator
+                        x:Name="actv"
+                        Margin="0,0,20,0"
+                    HorizontalOptions="EndAndExpand"
+                        IsVisible="{Binding IsBusy}"
+                        IsRunning="{Binding IsBusy}"/>   
+            </Grid>
+            
 
             <CollectionView x:Name="collectionBarb"
                             Margin="0,160"
@@ -83,10 +92,6 @@
                                      Span="2"/>
                 </CollectionView.ItemsLayout>   
             </CollectionView>
-            <ActivityIndicator VerticalOptions="Center" Color="Black"
-                               IsRunning="{Binding IsBusy}"
-                               IsVisible="{Binding IsBusy}"/>
-
              
             <Image Source="trinca.png"
                    VerticalOptions="End"

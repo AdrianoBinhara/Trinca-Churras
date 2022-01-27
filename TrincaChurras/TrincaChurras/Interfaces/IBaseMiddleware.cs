@@ -14,6 +14,12 @@ namespace TrincaChurras.Interfaces
         [Post("/bbq/auth")]
         Task<TokenResponse> PostUser([Body] object user);
 
+        [Post("/bbq")]
+        Task<OperationResult> PostBarbecue([Body] Barbecue barbecue, [Header("Authorization")] string authotization);
+
+        [Post("/bbq/participant")]
+        Task<OperationResult> PostParticipant([Body] Person person, [Header("Authorization")] string authotization);
+
         [Get("/bbq/{id}")]
         Task<Barbecue> GetBarbecueById(string id,[Header("Authorization")] string authorization);
 

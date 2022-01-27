@@ -6,7 +6,7 @@
     x:Class="TrincaChurras.Views.Templates.AgendaList"
     Padding="0,0,0,25"
     BackgroundColor="Transparent">
-   <pancake:PancakeView >
+   <pancake:PancakeView>
         <pancake:PancakeView.Shadow>
             <pancake:DropShadow Color="Black"
                                 Offset="10,7"

@@ -66,6 +66,48 @@ namespace TrincaChurras.Interfaces
             }
         }
 
+        public async Task<OperationDataResult<OperationResult>> PostBarbecure(Barbecue barbecue, string token)
+        {
+            try
+            {
+                var response = await Api.PostBarbecue(barbecue, token);
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = response.Message,
+                    Sucess = true
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = ex.Message,
+                    Sucess = false
+                };
+            }
+        }
+
+        public async Task<OperationDataResult<OperationResult>> PostParticipants(Person person, string token)
+        {
+            try
+            {
+                var response = await Api.PostParticipant(person, token);
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = response.Message,
+                    Sucess = true
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = ex.Message,
+                    Sucess = false
+                };
+            }
+        }
+
         public async Task<OperationDataResult<OperationResult>> PutParticipant(Person user, string token)
         {
             try

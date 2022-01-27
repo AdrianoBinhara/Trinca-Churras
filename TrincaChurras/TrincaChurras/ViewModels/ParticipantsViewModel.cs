@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Acr.UserDialogs;
 using TrincaChurras.Interfaces;
 using TrincaChurras.Models;
 using Xamarin.Essentials;
@@ -95,22 +96,37 @@ namespace TrincaChurras.ViewModels
                 await GetBarbecue();
             });
 
+            AddPariticipantsCommand = new Command(() => AddParticipantAsync());
             BackCommand = new Command(async () => await NavigateBackAsync());
             SelectedItemCommand = new Command<CollectionView>( (collection) =>  SelectedItemAsync(collection));
             SaveParticipantCommand = new Command(async () => await SaveParticipantAsync());
         }
 
+        public ICommand AddPariticipantsCommand { get; set; }
         public ICommand BackCommand { get; set; }
         public ICommand SelectedItemCommand { get; set; }
         public ICommand SaveParticipantCommand { get; set; }
 
+        private void AddParticipantAsync()
+        {
+            ParticipantsList.Add(new Person());
+            
+        }
 
         private async Task GetBarbecue()
         {
+            IsBusy =! IsBusy;
+
             TotalValue = 0;
             token = await SecureStorage.GetAsync("token");
 
             var response = await trincaMiddleware.GetBarbecueById(ChurrasId, token);
+
+            if (response.Data == null)
+            {
+                UserDialogs.Instance.Toast("Houve um erro ao exibir seu churras.");
+                return;
+            }
 
             Churras = response.Data;
             ParticipantsList = new ObservableCollection<Person>(response.Data.Participants.OrderBy(x=>x.Name).ToList());
@@ -120,20 +136,35 @@ namespace TrincaChurras.ViewModels
             {
                 TotalValue += item.Value_paid;
             }
+            IsBusy = !IsBusy;
         }
 
         private async Task SaveParticipantAsync()
         {
             IsBusy = !IsBusy;
-            Person person = new Person
+            if(Participant.Id ==null)
             {
-                Id = Participant.Id,
-                Bbq_id = Churras.Id,
-                Name = this.Name,
-                Value_paid = this.PaidValue,
-                Confirmed = this.IsPresent
-            };
-            await trincaMiddleware.PutParticipant(person, token);
+                Person person = new Person
+                {
+                    Bbq_id = Churras.Id,
+                    Name = this.Name,
+                    Value_paid = this.PaidValue,
+                    Confirmed = this.IsPresent
+                };
+                await trincaMiddleware.PostParticipants(person, token);
+            }
+            else
+            {
+                Person person = new Person
+                {
+                    Id = Participant.Id,
+                    Bbq_id = Churras.Id,
+                    Name = this.Name,
+                    Value_paid = this.PaidValue,
+                    Confirmed = this.IsPresent
+                };
+                await trincaMiddleware.PutParticipant(person, token);
+            }
             
             await GetBarbecue();
             IsBusy = !IsBusy;
