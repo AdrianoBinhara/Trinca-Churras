@@ -15,7 +15,7 @@
                         <VisualState x:Name="Normal" />
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="White" />
+                                <Setter Property="BackgroundColor" Value="{StaticResource whitePattern}" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -30,7 +30,7 @@
                         <VisualState x:Name="Normal" />
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="White" />
+                                <Setter Property="BackgroundColor" Value="{StaticResource whitePattern}" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -55,18 +55,15 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid BackgroundColor="White">
-            <Image
-                BackgroundColor="#FFD935"
-                Source="bbq_pattern.png"
-                VerticalOptions="StartAndExpand" />
+        <Grid BackgroundColor="{StaticResource whitePattern}">
+            <Image Style="{StaticResource imageBbq}" />
             <Grid Margin="0,80" VerticalOptions="Start">
 
                 <Label
                     FontFamily="RalewayBold"
                     HorizontalOptions="CenterAndExpand"
                     Text="Agenda de Churras"
-                    TextColor="Black"
+                    TextColor="{StaticResource blackPattern}"
                     VerticalTextAlignment="Center">
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double">
@@ -80,7 +77,8 @@
                     Margin="0,0,20,0"
                     HorizontalOptions="EndAndExpand"
                     IsRunning="{Binding IsBusy}"
-                    IsVisible="{Binding IsBusy}" />
+                    IsVisible="{Binding IsBusy}"
+                    Color="Black" />
             </Grid>
 
 

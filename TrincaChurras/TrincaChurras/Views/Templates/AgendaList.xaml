@@ -12,11 +12,11 @@
                 BlurRadius="10"
                 Opacity=".1"
                 Offset="10,10"
-                Color="Black" />
+                Color="{StaticResource blackPattern}" />
         </pancake:PancakeView.Shadow>
         <StackLayout
             Padding="10"
-            BackgroundColor="White"
+            BackgroundColor="{StaticResource whitePattern}"
             HeightRequest="120"
             VerticalOptions="Center"
             WidthRequest="150">
@@ -24,11 +24,11 @@
                 FontFamily="RalewayBold"
                 FontSize="Subtitle"
                 Text="{Binding Date, Converter={StaticResource DataConverter}}"
-                TextColor="Black" />
+                TextColor="{StaticResource blackPattern}" />
             <Label
                 FontFamily="RalewayBold"
                 Text="{Binding Title}"
-                TextColor="Black" />
+                TextColor="{StaticResource blackPattern}" />
             <StackLayout
                 Margin="0,0,0,10"
                 BackgroundColor="Transparent"
@@ -48,7 +48,7 @@
                         FontSize="Medium"
                         HorizontalOptions="StartAndExpand"
                         Text="{Binding Participants_count}"
-                        TextColor="Black"
+                        TextColor="{StaticResource blackPattern}"
                         VerticalTextAlignment="Start" />
 
                     <Image
@@ -59,7 +59,7 @@
                         FontFamily="RalewayRegular"
                         FontSize="Medium"
                         Text="{Binding TotalValue}"
-                        TextColor="Black"
+                        TextColor="{StaticResource blackPattern}"
                         VerticalTextAlignment="Start" />
                 </StackLayout>
             </StackLayout>

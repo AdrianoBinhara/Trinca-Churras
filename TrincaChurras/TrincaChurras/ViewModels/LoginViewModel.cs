@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using TrincaChurras.Models;
 using TrincaChurras.Interfaces;
+using Acr.UserDialogs;
 
 namespace TrincaChurras.ViewModels
 {
@@ -53,7 +54,7 @@ namespace TrincaChurras.ViewModels
                 var response = await trincaMiddleware.PostUser(new  {Username,Password });
                 if (!response.Sucess)
                 {
-                    await App.Current.MainPage.DisplayAlert("Atenção", response.Message, "OK");
+                    UserDialogs.Instance.Toast( "Usuário não autenticado");
                     return false;
                 }
 

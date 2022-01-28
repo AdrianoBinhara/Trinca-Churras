@@ -1,10 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:converters="clr-namespace:TrincaChurras.Helpers.Converters"
-             x:Class="TrincaChurras.App">
+<Application
+    x:Class="TrincaChurras.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:TrincaChurras.Helpers.Converters">
     <Application.Resources>
-        <converters:DataConverter
-            x:Key="DataConverter"/>
+
+        <Color x:Key="yellowTrinca">#FFD935</Color>
+        <Color x:Key="blackPattern">#000000</Color>
+        <Color x:Key="whitePattern">#FFFFFF</Color>
+
+        <Style x:Key="imageBbq" TargetType="Image">
+            <Setter Property="BackgroundColor" Value="{StaticResource yellowTrinca}" />
+            <Setter Property="Source" Value="bbq_pattern.png" />
+            <Setter Property="VerticalOptions" Value="StartAndExpand" />
+        </Style>
+
+        <Style x:Key="blackButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource blackPattern}" />
+            <Setter Property="CornerRadius" Value="18" />
+            <Setter Property="FontFamily" Value="RalewayBold" />
+            <Setter Property="TextColor" Value="{StaticResource whitePattern}" />
+        </Style>
+
+        <Style x:Key="backButton" TargetType="Button">
+            <Setter Property="Margin" Value="10,7,10,0" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="FontFamily" Value="FontAwesome" />
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Text" Value="&#xf104;" />
+            <Setter Property="TextColor" Value="{StaticResource blackPattern}" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        </Style>
+
+        <converters:DataConverter x:Key="DataConverter" />
     </Application.Resources>
 </Application>
+
+<!--
+    Margin="10,7,10,0"
+    BackgroundColor="Transparent"
+    Command="{Binding BackCommand}"
+    FontFamily="FontAwesome"
+    FontSize="Large"
+    HorizontalOptions="Start"
+    Text="&#xf104;"
+    TextColor="{StaticResource blackPattern}"
+    VerticalOptions="CenterAndExpand"
+-->

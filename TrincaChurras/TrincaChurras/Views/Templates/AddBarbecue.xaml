@@ -18,7 +18,7 @@
                        HeightRequest="60"
                        VerticalOptions="Center"/>
                 <Label Text="{Binding Title}"
-                       TextColor="Black"
+                       TextColor="{StaticResource blackPattern}"
                        VerticalOptions="Start"
                        FontFamily="RalewayBold"/>
             </StackLayout>

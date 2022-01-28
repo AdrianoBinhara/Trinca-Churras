@@ -8,22 +8,10 @@
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid BackgroundColor="#F9F9F9">
-            <Image
-                BackgroundColor="#FFD935"
-                Source="bbq_pattern.png"
-                VerticalOptions="StartAndExpand" />
+            <Image Style="{StaticResource imageBbq}" />
             <Grid Margin="0,80" VerticalOptions="Start">
 
-                <Button
-                    Margin="10,7,10,0"
-                    BackgroundColor="Transparent"
-                    Command="{Binding BackCommand}"
-                    FontFamily="FontAwesome"
-                    FontSize="Large"
-                    HorizontalOptions="Start"
-                    Text="&#xf104;"
-                    TextColor="Black"
-                    VerticalOptions="CenterAndExpand">
+                <Button Command="{Binding BackCommand}" Style="{StaticResource backButton}">
                     <Button.Triggers>
                         <DataTrigger
                             Binding="{Binding IsBusy}"
@@ -38,7 +26,7 @@
                     FontFamily="RalewayBold"
                     HorizontalOptions="CenterAndExpand"
                     Text="Agenda de Churras"
-                    TextColor="Black"
+                    TextColor="{StaticResource blackPattern}"
                     VerticalTextAlignment="Center">
                     <Label.FontSize>
                         <OnPlatform x:TypeArguments="x:Double">
@@ -52,7 +40,8 @@
                     Margin="0,0,20,0"
                     HorizontalOptions="EndAndExpand"
                     IsRunning="{Binding IsBusy}"
-                    IsVisible="{Binding IsBusy}" />
+                    IsVisible="{Binding IsBusy}"
+                    Color="Black" />
             </Grid>
 
             <!--  Barbecue Data  -->
@@ -63,11 +52,11 @@
                         BlurRadius="8"
                         Opacity=".2"
                         Offset="0,0"
-                        Color="Black" />
+                        Color="{StaticResource blackPattern}" />
                 </pancake:PancakeView.Shadow>
                 <Grid
                     Padding="20"
-                    BackgroundColor="White"
+                    BackgroundColor="{StaticResource whitePattern}"
                     ColumnDefinitions="3*,Auto, Auto"
                     RowDefinitions="Auto,Auto,Auto"
                     VerticalOptions="FillAndExpand">
@@ -77,7 +66,7 @@
                         FontFamily="RalewayBold"
                         FontSize="Medium"
                         MinimumDate="01/01/2022"
-                        TextColor="Black">
+                        TextColor="{StaticResource blackPattern}">
                         <DatePicker.Triggers>
                             <DataTrigger
                                 Binding="{Binding IsEditing}"
@@ -92,7 +81,7 @@
                         FontFamily="RalewayBold"
                         FontSize="Medium"
                         Text="{Binding Churras.Date, Converter={StaticResource DataConverter}}"
-                        TextColor="Black">
+                        TextColor="{StaticResource blackPattern}">
                         <Label.Triggers>
                             <DataTrigger
                                 Binding="{Binding IsEditing}"
@@ -109,7 +98,7 @@
                         FontSize="Large"
                         Placeholder="{Binding Churras.Title}"
                         Text="{Binding NewTitle}"
-                        TextColor="Black">
+                        TextColor="{StaticResource blackPattern}">
                         <Entry.Triggers>
                             <DataTrigger
                                 Binding="{Binding IsEditing}"
@@ -125,7 +114,7 @@
                         FontFamily="RalewayBold"
                         FontSize="Large"
                         Text="{Binding Churras.Title}"
-                        TextColor="Black">
+                        TextColor="{StaticResource blackPattern}">
                         <Label.Triggers>
                             <DataTrigger
                                 Binding="{Binding IsEditing}"
@@ -142,7 +131,7 @@
                             FontFamily="RalewayRegular"
                             FontSize="Medium"
                             Text="{Binding TotalParticipants}"
-                            TextColor="Black"
+                            TextColor="{StaticResource blackPattern}"
                             VerticalTextAlignment="Center" />
                     </StackLayout>
 
@@ -160,7 +149,7 @@
                             FontSize="Medium"
                             Placeholder="{Binding Churras.Value_per_person}"
                             Text="{Binding NewTotalValue}"
-                            TextColor="Black"
+                            TextColor="{StaticResource blackPattern}"
                             VerticalTextAlignment="Center"
                             WidthRequest="50">
                             <Entry.Triggers>
@@ -179,7 +168,7 @@
                             FontFamily="RalewayRegular"
                             FontSize="Medium"
                             Text="{Binding Churras.Value_per_person, StringFormat='R${0:F2}'}"
-                            TextColor="Black"
+                            TextColor="{StaticResource blackPattern}"
                             VerticalTextAlignment="Center">
                             <Label.Triggers>
                                 <DataTrigger
@@ -195,11 +184,11 @@
                     <Button
                         Grid.Row="2"
                         Grid.ColumnSpan="2"
-                        BackgroundColor="White"
+                        BackgroundColor="{StaticResource whitePattern}"
                         Command="{Binding AddPariticipantsCommand}"
                         HorizontalOptions="CenterAndExpand"
                         Text="Adicionar participantes"
-                        TextColor="Black">
+                        TextColor="{StaticResource blackPattern}">
                         <Button.Triggers>
                             <DataTrigger
                                 Binding="{Binding IsEditing}"
@@ -248,13 +237,13 @@
                                                 Text="Deletar" />
                                         </SwipeItems>
                                     </SwipeView.RightItems>
-                                    <StackLayout BackgroundColor="White">
+                                    <StackLayout BackgroundColor="{StaticResource whitePattern}">
                                         <Grid
-                                            BackgroundColor="White"
+                                            BackgroundColor="{StaticResource whitePattern}"
                                             ColumnDefinitions="3*,Auto"
                                             HeightRequest="50">
                                             <StackLayout
-                                                BackgroundColor="White"
+                                                BackgroundColor="{StaticResource whitePattern}"
                                                 Orientation="Horizontal"
                                                 Spacing="0">
                                                 <CheckBox
@@ -262,17 +251,17 @@
                                                     IsChecked="{Binding Confirmed}"
                                                     IsEnabled="False"
                                                     WidthRequest="32"
-                                                    Color="#FFD836" />
+                                                    Color="{StaticResource yellowTrinca}" />
                                                 <Label
                                                     FontFamily="RalewayRegular"
                                                     Text="{Binding Name}"
-                                                    TextColor="Black"
+                                                    TextColor="{StaticResource blackPattern}"
                                                     VerticalTextAlignment="Center" />
                                             </StackLayout>
                                             <Grid Grid.Column="1">
                                                 <Label
                                                     FontFamily="RalewayBold"
-                                                    TextColor="Black"
+                                                    TextColor="{StaticResource blackPattern}"
                                                     VerticalTextAlignment="Center">
                                                     <Label.FormattedText>
                                                         <FormattedString>
@@ -286,7 +275,7 @@
                                                     HeightRequest="1"
                                                     IsVisible="False"
                                                     VerticalOptions="Center"
-                                                    Color="Black">
+                                                    Color="{StaticResource blackPattern}">
                                                     <BoxView.Triggers>
                                                         <DataTrigger
                                                             Binding="{Binding Source={x:Reference check}, Path=IsChecked}"
@@ -324,7 +313,7 @@
                     Command="{Binding ChangeBarbecueCommand}"
                     FontFamily="FontAwesome"
                     Text="&#xf304;"
-                    TextColor="Black"
+                    TextColor="{StaticResource blackPattern}"
                     VerticalOptions="Center">
                     <Button.Triggers>
                         <DataTrigger
@@ -341,7 +330,7 @@
                     Command="{Binding DeleteBarbecueCommand}"
                     FontFamily="FontAwesome"
                     Text="&#xf1f8;"
-                    TextColor="Black"
+                    TextColor="{StaticResource blackPattern}"
                     VerticalOptions="Center">
                     <Button.Triggers>
                         <DataTrigger
@@ -374,7 +363,7 @@
                     Command="{Binding AcceptChangesCommand}"
                     FontFamily="FontAwesome"
                     Text="&#xf00c;"
-                    TextColor="Black"
+                    TextColor="{StaticResource blackPattern}"
                     VerticalOptions="Center">
                     <Button.Triggers>
                         <DataTrigger
@@ -391,7 +380,7 @@
                     Command="{Binding CancelChangesCommand}"
                     FontFamily="FontAwesome"
                     Text="&#xf00d;"
-                    TextColor="Black"
+                    TextColor="{StaticResource blackPattern}"
                     VerticalOptions="Center">
                     <Button.Triggers>
                         <DataTrigger
@@ -428,7 +417,7 @@
             <!--  Bottom Drawer  -->
             <Frame
                 x:Name="BottomDrawer"
-                BackgroundColor="White"
+                BackgroundColor="{StaticResource whitePattern}"
                 CornerRadius="20"
                 HasShadow="False"
                 HeightRequest="300"
@@ -452,18 +441,18 @@
                         FontFamily="RalewayRegular"
                         Placeholder="Name"
                         Text="{Binding Name}"
-                        TextColor="Black" />
+                        TextColor="{StaticResource blackPattern}" />
 
-                    <StackLayout BackgroundColor="White" Orientation="Horizontal">
+                    <StackLayout BackgroundColor="{StaticResource whitePattern}" Orientation="Horizontal">
                         <CheckBox
                             x:Name="checkDrawer"
                             IsChecked="{Binding IsPresent}"
                             WidthRequest="32"
-                            Color="#FFD836" />
+                            Color="{StaticResource yellowTrinca}" />
                         <Label
                             FontFamily="RalewayRegular"
                             Text="Confirmado"
-                            TextColor="Black"
+                            TextColor="{StaticResource blackPattern}"
                             VerticalTextAlignment="Center" />
 
                         <Entry
@@ -474,19 +463,16 @@
                             Keyboard="Numeric"
                             Placeholder="Valor Pago"
                             Text="{Binding PaidValue}"
-                            TextColor="Black"
+                            TextColor="{StaticResource blackPattern}"
                             WidthRequest="150" />
                     </StackLayout>
 
                     <Button
                         Margin="0,0,0,70"
-                        BackgroundColor="Black"
                         Clicked="Button_Clicked"
                         Command="{Binding SaveParticipantCommand}"
-                        CornerRadius="18"
-                        FontFamily="RalewayBold"
+                        Style="{StaticResource blackButton}"
                         Text="Salvar"
-                        TextColor="White"
                         VerticalOptions="EndAndExpand" />
 
                 </StackLayout>
