@@ -25,6 +25,7 @@ Link para o bug reportado: [Bug](https://developercommunity.visualstudio.com/t/b
 - [```Xamarin.Forms (5.0)```](https://github.com/xamarin/Xamarin.Forms)
 - [```Acr.UserDialogs (7.2.0)```](https://github.com/aritchie/userdialogs)
 - [```Xamarin CommunityToolkit (1.2.0)```](https://github.com/xamarin/XamarinCommunityToolkit)
+- [```PancakeView (2.3.0)```](https://github.com/sthewissen/Xamarin.Forms.PancakeView)
 
 ---
 
