@@ -12,7 +12,7 @@ namespace TrincaChurras.Views
         double openY = (Device.RuntimePlatform == "Android") ? 20 : 60;
         bool isBackdropEnabled = true;
 
-        public double lastPanY { get; private set; }
+        public double lastPanY = 0;
 
         public AddBarbecuePage()
         {
@@ -77,7 +77,6 @@ namespace TrincaChurras.Views
                     await CloseDrawer();
                 }
             });
-            isBackdropEnabled = true;
 
             collection.SelectedItem = null;
         }
@@ -90,6 +89,7 @@ namespace TrincaChurras.Views
                 FrameDrawer.TranslateTo(0, openY, length: duration, easing: Easing.SinIn)
             );
             Backdrop.InputTransparent = false;
+            isBackdropEnabled = true;
         }
 
         async Task CloseDrawer()
@@ -99,7 +99,7 @@ namespace TrincaChurras.Views
                 Backdrop.FadeTo(0, length: duration),
                 FrameDrawer.TranslateTo(0, 440, length: duration, easing: Easing.SinIn)
             );
-            Backdrop.InputTransparent = false;
+            Backdrop.InputTransparent = true;
         }
 
         void Button_Clicked(System.Object sender, System.EventArgs e)

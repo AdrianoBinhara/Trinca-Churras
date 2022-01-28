@@ -157,7 +157,8 @@ namespace TrincaChurras.ViewModels
                 IsBusy = !IsBusy;
                 return;
             }
-            
+
+            await _navigation.PopAsync();
             IsBusy = !IsBusy;
         }
         #endregion
