@@ -110,8 +110,8 @@ namespace TrincaChurras.ViewModels
 
             Participant = selected;
             Name = Participant.Name;
-            PaidValue = Participant.Value_paid ==  0? 1: Participant.Value_paid;
-            IsPresent = Participant.Confirmed ??false;
+            PaidValue = Participant.Value_paid;
+            IsPresent = Participant.Confirmed;
         }
 
         private void SaveParticipantAsync()

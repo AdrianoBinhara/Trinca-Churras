@@ -431,8 +431,8 @@
                 BackgroundColor="White"
                 CornerRadius="20"
                 HasShadow="False"
-                HeightRequest="300"
-                TranslationY="360"
+                HeightRequest="410"
+                TranslationY="490"
                 VerticalOptions="End"
                 WidthRequest="300">
                 <Frame.GestureRecognizers>

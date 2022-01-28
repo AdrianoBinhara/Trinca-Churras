@@ -241,8 +241,8 @@ namespace TrincaChurras.ViewModels
 
             Participant = selected;
             Name = Participant.Name;
-            PaidValue = Participant.Value_paid == 0 ? 1 : Participant.Value_paid;
-            IsPresent = Participant.Confirmed ?? false; 
+            PaidValue = Participant.Value_paid;
+            IsPresent = Participant.Confirmed; 
         }
         private async Task DeleteItemAsync(Person item)
         {
@@ -283,7 +283,7 @@ namespace TrincaChurras.ViewModels
                 Title = NewTitle ?? Churras.Title,
                 Description = " ",
                 Date = NewDate.ToString("yyyy-MM-dd"),
-                Value_per_person = NewTotalValue == 0 ?  NewTotalValue : Churras.TotalValue
+                Value_per_person = NewTotalValue
 
             };
             var response = await trincaMiddleware.PutBarbcue(churras, token);
