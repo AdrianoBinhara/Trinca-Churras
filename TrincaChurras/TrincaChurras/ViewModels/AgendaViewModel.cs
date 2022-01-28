@@ -31,7 +31,6 @@ namespace TrincaChurras.ViewModels
         }
 
         public ICommand SelectedChurrasCommand { get; set; }
-
         private void SubscribeMessagingCenter()
         {
             MessagingCenter.Subscribe<Page>(this, "UpdateList", async (sender) =>

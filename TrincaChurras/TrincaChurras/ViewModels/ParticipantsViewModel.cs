@@ -32,6 +32,36 @@ namespace TrincaChurras.ViewModels
             set { SetProperty(ref _churras, value); }
         }
 
+        private double _newTotalValue;
+        public double NewTotalValue
+        {
+            get { return _newTotalValue; }
+            set
+            {
+                SetProperty(ref _newTotalValue, value);
+            }
+        }
+
+        private string _newTitle;
+        public string NewTitle
+        {
+            get { return _newTitle; }
+            set
+            {
+                SetProperty(ref _newTitle, value);
+            }
+        }
+
+        private DateTime _newDate;
+        public DateTime NewDate
+        {
+            get { return _newDate; }
+            set
+            {
+                SetProperty(ref _newDate, value);
+            }
+        }
+
         private int _totalParticipants;
         public int TotalParticipants
         {
@@ -52,7 +82,6 @@ namespace TrincaChurras.ViewModels
             }
         }
 
-        private string token;
         private string _name;
         public string Name
         {
@@ -83,6 +112,14 @@ namespace TrincaChurras.ViewModels
             }
         }
 
+        private bool _isEditing = false;
+        public bool IsEditing
+        {
+            get { return _isEditing; }
+            set { SetProperty(ref _isEditing, value); }
+        }
+
+        private string token;
         public Person Participant { get; private set; }
         public string ChurrasId { get; private set; }
 
@@ -100,12 +137,22 @@ namespace TrincaChurras.ViewModels
             BackCommand = new Command(async () => await NavigateBackAsync());
             SelectedItemCommand = new Command<CollectionView>( (collection) =>  SelectedItemAsync(collection));
             SaveParticipantCommand = new Command(async () => await SaveParticipantAsync());
+            DeleteItemCommand = new Command<Person>(async (item) => await DeleteItemAsync(item));
+            DeleteBarbecueCommand = new Command(async () => await DeleteBarbecueAsync());
+            ChangeBarbecueCommand = new Command(() => ChangeBarbecueAsync());
+            AcceptChangesCommand = new Command(async () => await AcceptChangesAsync());
+            CancelChangesCommand = new Command(() => ChangeBarbecueAsync());
         }
 
         public ICommand AddPariticipantsCommand { get; set; }
         public ICommand BackCommand { get; set; }
         public ICommand SelectedItemCommand { get; set; }
         public ICommand SaveParticipantCommand { get; set; }
+        public ICommand DeleteItemCommand { get; set; }
+        public ICommand DeleteBarbecueCommand { get; set; }
+        public ICommand ChangeBarbecueCommand { get; set; }
+        public ICommand AcceptChangesCommand { get; set; }
+        public ICommand CancelChangesCommand { get; set; }
 
         private void AddParticipantAsync()
         {
@@ -125,6 +172,7 @@ namespace TrincaChurras.ViewModels
             if (response.Data == null)
             {
                 UserDialogs.Instance.Toast("Houve um erro ao exibir seu churras.");
+                IsBusy = !IsBusy;
                 return;
             }
 
@@ -134,7 +182,7 @@ namespace TrincaChurras.ViewModels
 
             foreach (var item in Churras.Participants)
             {
-                TotalValue += item.Value_paid;
+                TotalValue += item?.Value_paid ?? 0;
             }
             IsBusy = !IsBusy;
         }
@@ -179,8 +227,70 @@ namespace TrincaChurras.ViewModels
 
             Participant = selected;
             Name = Participant.Name;
-            PaidValue = Participant.Value_paid;
-            IsPresent = Participant.Confirmed;
+            PaidValue = Participant.Value_paid == 0 ? 1 : Participant.Value_paid;
+            IsPresent = Participant.Confirmed ?? false; 
+        }
+        private async Task DeleteItemAsync(Person item)
+        {
+            IsBusy = !IsBusy;
+            var selected = item;
+            var response = await trincaMiddleware.DeleteParticipant(Convert.ToInt32(selected.Id), token);
+            if(response.Message.Contains("Participant deleted successfully"))
+            {
+                ParticipantsList.Remove(selected);
+                UserDialogs.Instance.Toast("Participante removido!");
+            }
+            IsBusy = !IsBusy;
+        }
+
+        private async Task DeleteBarbecueAsync()
+        {
+            var delete = await App.Current.MainPage.DisplayAlert("Atenção!", "Deseja deletar este churras?", "Sim", "Não");
+
+            if (!delete)
+                return;
+            IsBusy = !IsBusy;
+
+            var response = await trincaMiddleware.DeleteBarbecue(Convert.ToInt32(ChurrasId), token);
+            if(response.Message.Contains("Barbecue deleted successfully"))
+            {
+                UserDialogs.Instance.Toast("Churras removido!");
+                await NavigateBackAsync();
+            }
+
+            IsBusy = !IsBusy;
+        }
+
+        private async Task AcceptChangesAsync()
+        {
+            Barbecue churras = new Barbecue
+            {
+                Id = Churras.Id,
+                Title = NewTitle ?? Churras.Title,
+                Description = " ",
+                Date = NewDate.ToString("yyyy-MM-dd"),
+                Value_per_person = NewTotalValue == 0 ?  NewTotalValue : Churras.TotalValue
+
+            };
+            var response = await trincaMiddleware.PutBarbcue(churras, token);
+
+            if (response.Sucess)
+                UserDialogs.Instance.Toast("Churras atualizado!");
+            
+            if(!response.Sucess)
+            {
+                UserDialogs.Instance.Toast("Erro ao atualizar o Churras!");
+                IsEditing = !IsEditing;
+                return;
+            }
+
+            await GetBarbecue();
+            IsEditing = !IsEditing;
+        }
+
+        private void ChangeBarbecueAsync()
+        {
+            IsEditing = !IsEditing;
         }
 
         private async Task NavigateBackAsync()

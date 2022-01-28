@@ -17,6 +17,7 @@
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
     <PackageReference Include="Acr.UserDialogs" Version="7.2.0.562" />
     <PackageReference Include="Xamarin.Forms.Skeleton" Version="2.0.0" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.2.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />
@@ -38,6 +39,7 @@
     <None Remove="Resources\Fonts\Font-Awesome.otf" />
     <None Remove="Acr.UserDialogs" />
     <None Remove="Xamarin.Forms.Skeleton" />
+    <None Remove="Xamarin.CommunityToolkit" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

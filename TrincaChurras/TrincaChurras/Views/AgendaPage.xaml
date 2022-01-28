@@ -3,7 +3,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     NavigationPage.HasNavigationBar="False"
+    x:Name="Agenda"
     xmlns:template="clr-namespace:TrincaChurras.Views.Templates"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     x:Class="TrincaChurras.Views.AgendaPage">
     <ContentPage.Resources>
         <Style TargetType="template:AddBarbecue">
@@ -40,7 +42,7 @@
 
         <ResourceDictionary>
             <DataTemplate x:Key="BarbecueTemplate">
-                <template:AgendaList/>
+                <template:AgendaList />
             </DataTemplate>
 
             <DataTemplate x:Key="AddBarbecueTemplate">

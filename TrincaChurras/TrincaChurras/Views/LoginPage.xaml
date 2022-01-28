@@ -49,6 +49,7 @@
                            FlexLayout.AlignSelf="Stretch"/>
                     <Entry Placeholder="senha"
                            HeightRequest="40"
+                           IsPassword="True"
                            Text="{Binding Password}"
                            FlexLayout.AlignSelf="Stretch"
                            FontAttributes="Italic"/>

@@ -9,5 +9,9 @@ namespace TrincaChurras.Interfaces
         private IBaseMiddleware _api;
 
         protected IBaseMiddleware Api => _api ?? (_api = RestService.For<IBaseMiddleware>(BaseUri.Uri));
+
+
+
+       
     }
 }

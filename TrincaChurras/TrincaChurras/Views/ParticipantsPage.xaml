@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
     NavigationPage.HasNavigationBar="False"
-    x:Class="TrincaChurras.Views.ParticipantsPage">
+    x:Class="TrincaChurras.Views.ParticipantsPage"
+    x:Name="Participants">
     <ContentPage.Content>
         <Grid BackgroundColor="#F9F9F9">
             <Image BackgroundColor="#FFD935"
@@ -21,7 +22,15 @@
                         Command="{Binding BackCommand}"
                         TextColor="Black"
                         VerticalOptions="CenterAndExpand"
-                        HorizontalOptions="Start"/>
+                        HorizontalOptions="Start">
+                    <Button.Triggers>
+                    <DataTrigger TargetType="Button"
+                                 Binding="{Binding IsBusy}"
+                                 Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                </Button.Triggers>
+                </Button>
 
                 <Label HorizontalOptions="CenterAndExpand"
                        Text="Agenda de Churras"
@@ -35,6 +44,9 @@
                         IsVisible="{Binding IsBusy}"
                         IsRunning="{Binding IsBusy}"/>   
             </Grid>
+
+            <!-- Barbecue Data -->
+
             <pancake:PancakeView Margin="10,170,10,100">
             <pancake:PancakeView.Shadow>
                 <pancake:DropShadow Color="Black"
@@ -48,15 +60,61 @@
                           RowDefinitions="Auto,Auto,Auto"
                           BackgroundColor="White">
 
+                        <DatePicker MinimumDate="01/01/2022"
+                                    Date="{Binding NewDate}"
+                               FontFamily="RalewayBold"
+                               FontSize="Medium"
+                               TextColor="Black">
+                            <DatePicker.Triggers>
+                                <DataTrigger TargetType="DatePicker"
+                                        Binding="{Binding IsEditing}"
+                                        Value="false">
+                                     <Setter Property="IsVisible" Value="false"/>
+                                 </DataTrigger>
+                            </DatePicker.Triggers>
+                        </DatePicker>
+
                         <Label Text="{Binding Churras.Date, Converter={StaticResource DataConverter}}"
                                FontFamily="RalewayBold"
                                FontSize="Medium"
-                               TextColor="Black"/>
+                               TextColor="Black">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label"
+                                        Binding="{Binding IsEditing}"
+                                        Value="True">
+                                     <Setter Property="IsVisible" Value="false"/>
+                                 </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+
+                        <Entry Text="{Binding NewTitle}"
+                               Placeholder="{Binding Churras.Title}"
+                               Grid.Row="1"
+                               FontFamily="RalewayBold"
+                               FontSize="Large"
+                               TextColor="Black">
+                            <Entry.Triggers>
+                                <DataTrigger TargetType="Entry"
+                                        Binding="{Binding IsEditing}"
+                                        Value="false">
+                                     <Setter Property="IsVisible" Value="false"/>
+                                 </DataTrigger>
+                            </Entry.Triggers>
+                        </Entry>
+
                         <Label Text="{Binding Churras.Title}"
                                Grid.Row="1"
                                FontFamily="RalewayBold"
                                FontSize="Large"
-                               TextColor="Black"/>
+                               TextColor="Black">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label"
+                                        Binding="{Binding IsEditing}"
+                                        Value="True">
+                                     <Setter Property="IsVisible" Value="False"/>
+                                 </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
 
                         <StackLayout Orientation="Horizontal" Grid.Column="1">
                             <Image Source="icon_people.png"
@@ -64,21 +122,49 @@
                             <Label Text="{Binding TotalParticipants}"
                                    FontFamily="RalewayRegular"
                                    FontSize="Medium"
+                                   VerticalTextAlignment="Center"
                                    TextColor="Black"/>
                         </StackLayout>
 
                         <StackLayout Orientation="Horizontal"
                                      Grid.Row="1"
                                      Grid.Column="1">
+
                             <Image Source="icon_money.png"
                                 HeightRequest="15"/>
-                            <Label Text="{Binding TotalValue, StringFormat='R${0:F2}'}"
+
+                            <Entry Text="{Binding NewTotalValue}"
+                                   Placeholder="{Binding Churras.Value_per_person}"
                                    Grid.Row="1"
                                    Grid.Column="1"
                                    VerticalTextAlignment="Center"
                                    FontFamily="RalewayRegular"
                                    FontSize="Medium"
-                                   TextColor="Black"/>
+                                   TextColor="Black">
+                                <Entry.Triggers>
+                                    <DataTrigger TargetType="Entry"
+                                        Binding="{Binding IsEditing}"
+                                        Value="false">
+                                        <Setter Property="IsVisible" Value="false"/>
+                                    </DataTrigger>
+                                </Entry.Triggers>
+                            </Entry>
+
+                            <Label Text="{Binding Churras.Value_per_person, StringFormat='R${0:F2}'}"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   VerticalTextAlignment="Center"
+                                   FontFamily="RalewayRegular"
+                                   FontSize="Medium"
+                                   TextColor="Black">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label"
+                                        Binding="{Binding IsEditing}"
+                                        Value="True">
+                                     <Setter Property="IsVisible" Value="False"/>
+                                 </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
                         </StackLayout>
 
                         <Button Text="Adicionar participantes"
@@ -87,7 +173,15 @@
                                 BackgroundColor="White"
                                 HorizontalOptions="CenterAndExpand"
                                 Grid.Row="2"
-                                Command="{Binding AddPariticipantsCommand}"/>
+                                Command="{Binding AddPariticipantsCommand}">
+                             <Button.Triggers>
+                                 <DataTrigger TargetType="Button"
+                                        Binding="{Binding IsEditing}"
+                                        Value="True">
+                                     <Setter Property="IsEnabled" Value="False"/>
+                                 </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
 
                         <CollectionView
                             x:Name="collectionParticipants"
@@ -95,71 +189,170 @@
                             Margin="0,20,0,0"
                             VerticalScrollBarVisibility="Never"
                             SelectionMode="Single"
+                            BackgroundColor="White"
                             SelectionChangedCommand="{Binding SelectedItemCommand}"
                             SelectionChangedCommandParameter="{x:Reference collectionParticipants}"
                             SelectionChanged="collectionParticipants_SelectionChanged"
                             ItemsSource="{Binding ParticipantsList}"
                             Grid.Row="3">
+
+                            <CollectionView.Triggers>
+                                 <DataTrigger TargetType="CollectionView"
+                                        Binding="{Binding IsEditing}"
+                                        Value="True">
+                                     <Setter Property="IsEnabled" Value="False"/>
+                                 </DataTrigger>
+                            </CollectionView.Triggers>
+
                             <CollectionView.ItemsLayout>
                                 <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout BackgroundColor="White">
-                                        <Grid ColumnDefinitions="3*,Auto" HeightRequest="50" BackgroundColor="White">
-                                            <StackLayout Spacing="0" Orientation="Horizontal" BackgroundColor="White">
-                                                <CheckBox
-                                                    WidthRequest="32" x:Name="check"
-                                                    IsChecked="{Binding Confirmed}"
-                                                    IsEnabled="False"   
-                                                    Color="#FFD836"/>
-                                                <Label TextColor="Black"
-                                                       VerticalTextAlignment="Center"
-                                                       FontFamily="RalewayRegular"
-                                                       Text="{Binding Name}"/>
-                                            </StackLayout>
-                                            <Grid Grid.Column="1">
-                                                <Label TextColor="Black"
-                                                       VerticalTextAlignment="Center"
-                                                       FontFamily="RalewayBold">
-                                                    <Label.FormattedText>
-                                                        <FormattedString>
-                                                            <Span Text="R$"/>
-                                                            <Span Text="{Binding Value_paid, StringFormat='{0:F2}'}" />
-                                                        </FormattedString>
-                                                    </Label.FormattedText>
-                                                </Label>
-                                                <BoxView    
-                                                    x:Name="boxBlack"
-                                                    HeightRequest="1"
-                                                    IsVisible="False"
-                                                    VerticalOptions="Center"
-                                                    Color="Black" >
-                                                    <BoxView.Triggers>
-                                                        <DataTrigger TargetType="BoxView" Binding="{Binding Source={x:Reference check}, Path=IsChecked}"
-                                                                     Value="True">
-                                                            <Setter Property="IsVisible" Value="True"/>
-                                                        </DataTrigger>
-                                                    </BoxView.Triggers>
-                                                </BoxView>
-                                            </Grid>
-                                        </Grid>
-                                        <BoxView HeightRequest="1"
-                                                 HorizontalOptions="FillAndExpand"
-                                                 Opacity=".5"
-                                                 Color="#E5C231"/>
-                                    </StackLayout>
+                                    <SwipeView>
+                                        <SwipeView.RightItems>
+                                            <SwipeItems Mode="Execute">
+                                                <SwipeItem Text="Deletar"
+                                                           IconImageSource="delete.png"
+                                                           BackgroundColor="#FFD986"
+                                                           Command="{Binding Path=BindingContext.DeleteItemCommand, Source={x:Reference Name=Participants}}"
+                                                           CommandParameter="{Binding .}"/>
+                                            </SwipeItems>
+                                            </SwipeView.RightItems>
+                                            <StackLayout BackgroundColor="White">
+                                                <Grid ColumnDefinitions="3*,Auto" HeightRequest="50" BackgroundColor="White">
+                                                    <StackLayout Spacing="0" Orientation="Horizontal" BackgroundColor="White">
+                                                        <CheckBox
+                                                            WidthRequest="32" x:Name="check"
+                                                            IsChecked="{Binding Confirmed}"
+                                                            IsEnabled="False"   
+                                                            Color="#FFD836"/>
+                                                        <Label TextColor="Black"
+                                                               VerticalTextAlignment="Center"
+                                                               FontFamily="RalewayRegular"
+                                                               Text="{Binding Name}"/>
+                                                    </StackLayout>
+                                                    <Grid Grid.Column="1">
+                                                        <Label TextColor="Black"
+                                                               VerticalTextAlignment="Center"
+                                                               FontFamily="RalewayBold">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="R$"/>
+                                                                    <Span Text="{Binding Value_paid, StringFormat='{0:F2}'}" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                        <BoxView    
+                                                            x:Name="boxBlack"
+                                                            HeightRequest="1"
+                                                            IsVisible="False"
+                                                            VerticalOptions="Center"
+                                                            Color="Black" >
+                                                            <BoxView.Triggers>
+                                                                <DataTrigger TargetType="BoxView" Binding="{Binding Source={x:Reference check}, Path=IsChecked}"
+                                                                             Value="True">
+                                                                    <Setter Property="IsVisible" Value="True"/>
+                                                                </DataTrigger>
+                                                            </BoxView.Triggers>
+                                                        </BoxView>
+                                                    </Grid>
+                                                </Grid>
+                                                <BoxView HeightRequest="1"
+                                                         HorizontalOptions="FillAndExpand"
+                                                         Opacity=".5"
+                                                         Color="#E5C231"/>
+                                        </StackLayout>
+                                    </SwipeView>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
                     </Grid>
             </pancake:PancakeView>
-            <Image Source="trinca.png"
-                   VerticalOptions="End"
-                   Margin="0,0,0,30"/>
 
+            <!-- Bottom Buttons -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="100" Margin="0,0,0,50" VerticalOptions="End" BackgroundColor="Transparent">
+                 <Button
+                    Text="&#xf304;"
+                    TextColor="Black"
+                    Command="{Binding ChangeBarbecueCommand}"
+                    FontFamily="FontAwesome"
+                    VerticalOptions="Center">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button"
+                                 Binding="{Binding IsBusy}"
+                                 Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                </Button.Triggers>
+                </Button>
 
-            <!-- backdrop-->
+                 <Button
+                    Text="&#xf1f8;"
+                    TextColor="Black"
+                    Command="{Binding DeleteBarbecueCommand}"
+                    FontFamily="FontAwesome"
+                    VerticalOptions="Center">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding IsBusy}"
+                                     Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <StackLayout.Triggers>
+                    <DataTrigger TargetType="StackLayout"
+                        Binding="{Binding IsEditing}"
+                        Value="True">
+                        <Setter Property="IsVisible" Value="False"/>
+                    </DataTrigger>
+                </StackLayout.Triggers>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal"  HorizontalOptions="Center" Spacing="100" Margin="0,0,0,50" VerticalOptions="End" BackgroundColor="Transparent">
+                 <Button
+                    Text="&#xf00c;"
+                    TextColor="Black"
+                    Command="{Binding AcceptChangesCommand}"
+                    FontFamily="FontAwesome"
+                    VerticalOptions="Center">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button"
+                                 Binding="{Binding IsBusy}"
+                                 Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                </Button.Triggers>
+                </Button>
+
+                 <Button
+                    Text="&#xf00d;"
+                    TextColor="Black"
+                    Command="{Binding CancelChangesCommand}"
+                    FontFamily="FontAwesome"
+                    VerticalOptions="Center">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                            Binding="{Binding IsBusy}"
+                            Value="True">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+
+                <StackLayout.Triggers>
+                    <DataTrigger TargetType="StackLayout"
+                        Binding="{Binding IsEditing}"
+                        Value="false">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </StackLayout.Triggers>
+
+            </StackLayout>
+
+            <!-- Backdrop-->
+
             <BoxView Color="#4B000000"
                      Opacity="0"
                      InputTransparent="True"

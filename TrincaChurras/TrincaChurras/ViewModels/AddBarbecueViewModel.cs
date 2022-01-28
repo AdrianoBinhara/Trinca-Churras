@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Acr.UserDialogs;
 using TrincaChurras.Interfaces;
 using TrincaChurras.Models;
 using Xamarin.Essentials;
@@ -35,7 +36,7 @@ namespace TrincaChurras.ViewModels
             }
         }
 
-        private double _paidValue = 0;
+        private double _paidValue = 0.0;
         public double PaidValue
         {
             get { return _paidValue; }
@@ -45,7 +46,7 @@ namespace TrincaChurras.ViewModels
             }
         }
 
-        private bool _isPresent;
+        private bool _isPresent = false;
         public bool IsPresent
         {
             get { return _isPresent; }
@@ -102,8 +103,8 @@ namespace TrincaChurras.ViewModels
 
             Participant = selected;
             Name = Participant.Name;
-            PaidValue = Participant.Value_paid;
-            IsPresent = Participant.Confirmed;
+            PaidValue = Participant.Value_paid ==  0? 1: Participant.Value_paid;
+            IsPresent = Participant.Confirmed ??false;
         }
 
         private void SaveParticipantAsync()
@@ -112,7 +113,7 @@ namespace TrincaChurras.ViewModels
             {
                 Id = Participant.Id,
                 Name = this.Name,
-                Value_paid = this.PaidValue,
+                Value_paid = PaidValue == 0 ? 0.0 : this.PaidValue,
                 Confirmed = this.IsPresent
             };
             var index = ParticipantsList.IndexOf(Participant);
@@ -122,8 +123,11 @@ namespace TrincaChurras.ViewModels
 
         private async Task BackButtonAsync()
         {
-            if (Date == null || ParticipantsList == null)
+            if (Date == null || ParticipantsList == null || Title == null)
+            {
+                await _navigation.PopAsync();
                 return;
+            }
 
             IsBusy = !IsBusy;
 
@@ -131,16 +135,22 @@ namespace TrincaChurras.ViewModels
 
             var barbecue = new Barbecue
             {
-                Date = this.Date.ToString(),
+                Date = this.Date.ToString("yyyy-MM-dd"),
                 Description = " ",
                 Title = this.Title,
-                Value_per_person = this.ValuePerPeson,
+                Value_per_person = this.ValuePerPeson == 0? 1: ValuePerPeson,
                 Participants = new List<Person>(ParticipantsList)
 
             };
 
-            await trincaMiddleware.PostBarbecure(barbecue, token);
-            await _navigation.PopAsync();
+            var result =  await trincaMiddleware.PostBarbecure(barbecue, token);
+            if (!result.Sucess)
+            {
+                UserDialogs.Instance.Toast("A criação falhou, verifique os dados preenchidos");
+                IsBusy = !IsBusy;
+                return;
+            }
+            
             IsBusy = !IsBusy;
         }
     }

@@ -21,7 +21,15 @@
                         Command="{Binding BackButtonCommand}"
                         TextColor="Black"
                         VerticalOptions="CenterAndExpand"
-                        HorizontalOptions="Start"/>
+                        HorizontalOptions="Start">
+                    <Button.Triggers>
+                    <DataTrigger TargetType="Button"
+                                 Binding="{Binding IsBusy}"
+                                 Value="True">
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                </Button.Triggers>
+                </Button>
 
                 <Label HorizontalOptions="CenterAndExpand"
                        Text="Adicionar de Churras"

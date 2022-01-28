@@ -108,11 +108,74 @@ namespace TrincaChurras.Interfaces
             }
         }
 
+        public async Task<OperationDataResult<OperationResult>> DeleteParticipant(int id, string token)
+        {
+            try
+            {
+                var response = await Api.DeleteParticipant(id, token);
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = response.Message,
+                    Sucess = true
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = ex.Message,
+                    Sucess = false
+                };
+            }
+        }
+
+        public async Task<OperationDataResult<OperationResult>> DeleteBarbecue(int id, string token)
+        {
+            try
+            {
+                var response = await Api.DeleteBarbecue(id, token);
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = response.Message,
+                    Sucess = true
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = ex.Message,
+                    Sucess = false
+                };
+            }
+        }
+
         public async Task<OperationDataResult<OperationResult>> PutParticipant(Person user, string token)
         {
             try
             {
                 var response = await Api.PutParticipant(user, token);
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = response.Message,
+                    Sucess = true
+                };
+            }
+            catch (Exception ex)
+            {
+                return new OperationDataResult<OperationResult>
+                {
+                    Message = ex.Message,
+                    Sucess = false
+                };
+            }
+        }
+
+        public async Task<OperationDataResult<OperationResult>> PutBarbcue(Barbecue barbcue, string token)
+        {
+            try
+            {
+                var response = await Api.PutBarbcure(barbcue, token);
                 return new OperationDataResult<OperationResult>
                 {
                     Message = response.Message,

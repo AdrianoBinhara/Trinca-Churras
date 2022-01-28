@@ -15,9 +15,9 @@ namespace TrincaChurras.Models
         public string Name { get; set; }
 
         [JsonPropertyName("confirmed")]
-        public bool Confirmed { get; set; }
+        public bool? Confirmed { get; set; }
 
-        [JsonPropertyName("value_paid")]
+        [JsonPropertyName("value_paid" )]
         public double Value_paid { get; set; }
     }
 }

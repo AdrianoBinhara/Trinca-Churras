@@ -39,7 +39,7 @@
                            HeightRequest="15"/>
                     <Label Text="{Binding Participants_count}"
                            TextColor="Black"
-                           FontSize="Large"
+                           FontSize="Medium"
                            HorizontalOptions="StartAndExpand"
                            VerticalTextAlignment="Start"
                            FontFamily="RalewayRegular"/>
