@@ -29,7 +29,7 @@ Link para o bug reportado: [Bug](https://developercommunity.visualstudio.com/t/b
 
 
 ## Telas Vertical
-| ![Page1](Resources/splash_screen.png)  | ![Page2](Resources/login.png) | ![Page3](Resources/lista.png) | ![Page4](Resouces/addChurras.png)
+| ![Page1](Resources/splash_screen.png)  | ![Page2](Resources/login.png) | ![Page3](Resources/lista.png) | ![Page4](Resources/addChurras.png)
 |:---:|:---:|:---:|:---:|
 | Splash Screen | Tela de Login | Lista de Churras | Adicionar Churras |
 
