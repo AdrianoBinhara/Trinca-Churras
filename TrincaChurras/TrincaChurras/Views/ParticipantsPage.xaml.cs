@@ -13,7 +13,7 @@ namespace TrincaChurras.Views
         double openY = (Device.RuntimePlatform == "Android") ? 20 : 60;
         bool isBackdropEnabled = true;
 
-        public double lastPanY { get; private set; }
+        public double lastPanY =0;
     
         public ParticipantsPage(string id)
         {
@@ -49,7 +49,7 @@ namespace TrincaChurras.Views
                         await CloseDrawer();
                     });
                 }
-                isBackdropEnabled = false;
+                
             }
         }
 
@@ -78,7 +78,6 @@ namespace TrincaChurras.Views
                     await CloseDrawer();
                 }
             });
-            isBackdropEnabled = true;
 
             collection.SelectedItem = null;
         }
@@ -91,6 +90,7 @@ namespace TrincaChurras.Views
                 BottomDrawer.TranslateTo(0, openY, length: duration, easing: Easing.SinIn)
             );
             Backdrop.InputTransparent = false;
+            isBackdropEnabled = true;
         }
 
         async Task CloseDrawer()
@@ -100,7 +100,7 @@ namespace TrincaChurras.Views
                 Backdrop.FadeTo(0, length: duration),
                 BottomDrawer.TranslateTo(0, 440, length: duration, easing: Easing.SinIn)
             );
-            Backdrop.InputTransparent = false;
+            Backdrop.InputTransparent = true;
         }
 
         void Button_Clicked(System.Object sender, System.EventArgs e)
@@ -109,6 +109,7 @@ namespace TrincaChurras.Views
             {
                 await CloseDrawer();
             });
+            isBackdropEnabled = false;
         }
 
     }
