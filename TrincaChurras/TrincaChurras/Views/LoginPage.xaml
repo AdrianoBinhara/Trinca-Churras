@@ -7,103 +7,105 @@
     NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Content>
-        <Grid BackgroundColor="#FFD935">
-            <Image Source="pattern.png" VerticalOptions="StartAndExpand" />
-            <FlexLayout
-                AlignItems="Center"
-                Direction="Column"
-                JustifyContent="Center">
+        <ScrollView>
+            <Grid BackgroundColor="#FFD935">
+                <Image Source="pattern.png" VerticalOptions="StartAndExpand" />
                 <FlexLayout
                     AlignItems="Center"
-                    BackgroundColor="Transparent"
                     Direction="Column"
-                    FlexLayout.Grow="1"
                     JustifyContent="Center">
-                    <Label
-                        FontAttributes="Bold"
-                        FontFamily="RalewayBold"
-                        FontSize="Subtitle"
-                        Text="Agenda de Churras"
-                        TextColor="Black" />
+                    <FlexLayout
+                        AlignItems="Center"
+                        BackgroundColor="Transparent"
+                        Direction="Column"
+                        FlexLayout.Grow="1"
+                        JustifyContent="Center">
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="RalewayBold"
+                            FontSize="Subtitle"
+                            Text="Agenda de Churras"
+                            TextColor="Black" />
+                    </FlexLayout>
+
+                    <FlexLayout
+                        Margin="80,0"
+                        AlignItems="Center"
+                        Direction="Column"
+                        FlexLayout.Grow="1"
+                        JustifyContent="Center">
+                        <Label
+                            Margin="0,0,0,10"
+                            FlexLayout.AlignSelf="Stretch"
+                            FontFamily="RalewayBold"
+                            Text="Login"
+                            TextColor="Black" />
+                        <Entry
+                            FlexLayout.AlignSelf="Stretch"
+                            FontAttributes="Italic"
+                            HeightRequest="40"
+                            Placeholder="e-mail"
+                            Text="{Binding Username}"
+                            TextTransform="None" />
+
+                        <Label
+                            Margin="0,30,0,10"
+                            FlexLayout.AlignSelf="Stretch"
+                            FontFamily="RalewayBold"
+                            Text="Senha"
+                            TextColor="Black" />
+                        <Entry
+                            FlexLayout.AlignSelf="Stretch"
+                            FontAttributes="Italic"
+                            HeightRequest="40"
+                            IsPassword="True"
+                            Placeholder="senha"
+                            Text="{Binding Password}" />
+                    </FlexLayout>
+
+                    <FlexLayout
+                        Margin="80,0"
+                        AlignItems="Center"
+                        Direction="Column"
+                        FlexLayout.Grow="1"
+                        JustifyContent="Center">
+                        <Button
+                            BackgroundColor="Black"
+                            Command="{Binding LoginCommand}"
+                            CornerRadius="18"
+                            FlexLayout.AlignSelf="Stretch"
+                            FontFamily="RalewayBold"
+                            Text="Entrar"
+                            TextColor="White">
+                            <Button.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding IsBusy}"
+                                    TargetType="Button"
+                                    Value="True">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </FlexLayout>
+
+                    <FlexLayout
+                        Margin="80,0"
+                        AlignItems="Center"
+                        Direction="Column"
+                        FlexLayout.Grow="1"
+                        JustifyContent="Center">
+                        <Image Source="trinca.png" />
+                    </FlexLayout>
+
                 </FlexLayout>
-
-                <FlexLayout
-                    Margin="80,0"
-                    AlignItems="Center"
-                    Direction="Column"
-                    FlexLayout.Grow="1"
-                    JustifyContent="Center">
-                    <Label
-                        Margin="0,0,0,10"
-                        FlexLayout.AlignSelf="Stretch"
-                        FontFamily="RalewayBold"
-                        Text="Login"
-                        TextColor="Black" />
-                    <Entry
-                        FlexLayout.AlignSelf="Stretch"
-                        FontAttributes="Italic"
-                        HeightRequest="40"
-                        Placeholder="e-mail"
-                        Text="{Binding Username}"
-                        TextTransform="None" />
-
-                    <Label
-                        Margin="0,30,0,10"
-                        FlexLayout.AlignSelf="Stretch"
-                        FontFamily="RalewayBold"
-                        Text="Senha"
-                        TextColor="Black" />
-                    <Entry
-                        FlexLayout.AlignSelf="Stretch"
-                        FontAttributes="Italic"
-                        HeightRequest="40"
-                        IsPassword="True"
-                        Placeholder="senha"
-                        Text="{Binding Password}" />
-                </FlexLayout>
-
-                <FlexLayout
-                    Margin="80,0"
-                    AlignItems="Center"
-                    Direction="Column"
-                    FlexLayout.Grow="1"
-                    JustifyContent="Center">
-                    <Button
-                        BackgroundColor="Black"
-                        Command="{Binding LoginCommand}"
-                        CornerRadius="18"
-                        FlexLayout.AlignSelf="Stretch"
-                        FontFamily="RalewayBold"
-                        Text="Entrar"
-                        TextColor="White">
-                        <Button.Triggers>
-                            <DataTrigger
-                                Binding="{Binding IsBusy}"
-                                TargetType="Button"
-                                Value="True">
-                                <Setter Property="IsEnabled" Value="False" />
-                            </DataTrigger>
-                        </Button.Triggers>
-                    </Button>
-                </FlexLayout>
-
-                <FlexLayout
-                    Margin="80,0"
-                    AlignItems="Center"
-                    Direction="Column"
-                    FlexLayout.Grow="1"
-                    JustifyContent="Center">
-                    <Image Source="trinca.png" />
-                </FlexLayout>
-
-            </FlexLayout>
-            <ActivityIndicator
-                x:Name="actv"
-                Margin="0,50,0,0"
-                IsRunning="{Binding IsBusy}"
-                IsVisible="{Binding IsBusy}"
-                VerticalOptions="Center"
-                Color="Black" />
-        </Grid>
+                <ActivityIndicator
+                    x:Name="actv"
+                    Margin="0,50,0,0"
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    VerticalOptions="Center"
+                    Color="Black" />
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
