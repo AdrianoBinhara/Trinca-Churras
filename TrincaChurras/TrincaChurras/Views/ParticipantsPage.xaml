@@ -167,7 +167,7 @@
                             Grid.Column="1"
                             FontFamily="RalewayRegular"
                             FontSize="Medium"
-                            Text="{Binding Churras.Value_per_person, StringFormat='R${0:F2}'}"
+                            Text="{Binding TotalValue, StringFormat='R${0:F2}'}"
                             TextColor="{StaticResource blackPattern}"
                             VerticalTextAlignment="Center">
                             <Label.Triggers>
