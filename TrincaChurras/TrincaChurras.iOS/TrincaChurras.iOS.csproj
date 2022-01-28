@@ -158,5 +158,8 @@
     <BundleResource Include="Resources\icon_bbq.png" />
     <BundleResource Include="Resources\icon_people.png" />
     <BundleResource Include="Resources\icon_money.png" />
+    <BundleResource Include="Resources\logoTrinca.png">
+      <Optimize>false</Optimize>
+    </BundleResource>
   </ItemGroup>
 </Project>
