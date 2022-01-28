@@ -24,6 +24,7 @@ Link para o bug reportado: [Bug](https://developercommunity.visualstudio.com/t/b
 - [```Refit (6.1.15)```](https://github.com/reactiveui/refit)
 - [```Xamarin.Forms (5.0)```](https://github.com/xamarin/Xamarin.Forms)
 - [```Acr.UserDialogs (7.2.0)```](https://github.com/aritchie/userdialogs)
+- [```Xamarin CommunityToolkit (1.2.0)```](https://github.com/xamarin/XamarinCommunityToolkit)
 
 ---
 
@@ -37,15 +38,16 @@ Link para o bug reportado: [Bug](https://developercommunity.visualstudio.com/t/b
 O aplicativo utiliza o pacote [```Refit```](https://github.com/reactiveui/refit) para chamadas API REST, por possuir uma implementação fácil, código limpo e legível.
 Facilita também a criação de testes unitários.
 ```C#
- [[Get("/")]
- Task<List<ItemsModel>> GetItems();
+ [Post("/bbq/auth")]
+ Task<TokenResponse> PostUser([Body] object user);
 ```
 
 ## Avisos no app
 O pacote [```Acr.UserDialogs```](https://github.com/aritchie/userdialogs) é responsável pela exibição de toasts. Diferente da implementação nativa, ele possui um visual moderno e de fácil estilização.
 
 ### Possíveis erros ⚠️
----
+--- A API está retornando valor null para os tipos de dados bool, double e int, quando retornando false, 0.0, e 0, respectivamente.
+Por isso, o valor para cada participante de um churras está definido como 1, e a propriedade bool está com atributo nulable (bool?)
  
 
 ## Comentários finais. 💬
