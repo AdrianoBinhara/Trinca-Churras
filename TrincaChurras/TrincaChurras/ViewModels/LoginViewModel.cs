@@ -11,20 +11,28 @@ namespace TrincaChurras.ViewModels
 {
     public class LoginViewModel :BaseViewModel
     {
+        #region Properties
         protected INavigation _navigation;
         protected TrincaMiddleware trincaMiddleware = new TrincaMiddleware();
 
         public string Username { get; set; }
         public string Password { get; set; }
+        #endregion
 
+        #region Constructor
         public LoginViewModel(INavigation navigation)
         {
             _navigation = navigation;
 
             LoginCommand = new Command(async() =>await LoginAsync());
         }
-        public ICommand LoginCommand { get; set; }
+        #endregion
 
+        #region Commands
+        public ICommand LoginCommand { get; set; }
+        #endregion
+
+        #region Methods
         private async Task LoginAsync()
         {
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
@@ -63,5 +71,6 @@ namespace TrincaChurras.ViewModels
                 IsBusy = !IsBusy;
             }
         }
+        #endregion
     }
 }

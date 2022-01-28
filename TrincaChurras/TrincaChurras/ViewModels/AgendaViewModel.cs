@@ -12,6 +12,7 @@ namespace TrincaChurras.ViewModels
 {
     public class AgendaViewModel : BaseViewModel
     {
+        #region Properties
         protected TrincaMiddleware trincaMiddleware = new TrincaMiddleware();
         protected INavigation _navigation;
 
@@ -21,7 +22,9 @@ namespace TrincaChurras.ViewModels
             get { return _listaAgenda; }
             set { SetProperty(ref _listaAgenda, value); }
         }
+        #endregion
 
+        #region Constructor
         public AgendaViewModel(INavigation navigation)
         {
             _navigation = navigation;
@@ -29,8 +32,13 @@ namespace TrincaChurras.ViewModels
             SelectedChurrasCommand = new Command<CollectionView>(async (churras) => await SelectChurrasAsync(churras));
             SubscribeMessagingCenter();
         }
+        #endregion
 
+        #region Commands
         public ICommand SelectedChurrasCommand { get; set; }
+        #endregion
+
+        #region Methods
         private void SubscribeMessagingCenter()
         {
             MessagingCenter.Subscribe<Page>(this, "UpdateList", async (sender) =>
@@ -65,5 +73,6 @@ namespace TrincaChurras.ViewModels
 
             IsBusy = !IsBusy;
         }
+        #endregion
     }
 }

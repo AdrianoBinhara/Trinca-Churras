@@ -57,7 +57,7 @@
 
    <ContentPage.Content>
         <Grid BackgroundColor="White">
-            <Image BackgroundColor="#FFD935" Source="bbq-pattern.png" VerticalOptions="StartAndExpand"/>
+            <Image BackgroundColor="#FFD935" Source="bbq_pattern.png" VerticalOptions="StartAndExpand"/>
              <Grid Margin="0,80"
                   VerticalOptions="Start">
 

@@ -13,6 +13,7 @@ namespace TrincaChurras.ViewModels
 {
     public class ParticipantsViewModel: BaseViewModel
     {
+        #region Properties
         protected INavigation _navigation;
         protected TrincaMiddleware trincaMiddleware = new TrincaMiddleware();
 
@@ -123,6 +124,9 @@ namespace TrincaChurras.ViewModels
         public Person Participant { get; private set; }
         public string ChurrasId { get; private set; }
 
+        #endregion
+
+        #region Constructor
 
         public ParticipantsViewModel(INavigation navigation, string churrasId)
         {
@@ -143,7 +147,9 @@ namespace TrincaChurras.ViewModels
             AcceptChangesCommand = new Command(async () => await AcceptChangesAsync());
             CancelChangesCommand = new Command(() => ChangeBarbecueAsync());
         }
+        #endregion
 
+        #region Commands
         public ICommand AddPariticipantsCommand { get; set; }
         public ICommand BackCommand { get; set; }
         public ICommand SelectedItemCommand { get; set; }
@@ -153,11 +159,19 @@ namespace TrincaChurras.ViewModels
         public ICommand ChangeBarbecueCommand { get; set; }
         public ICommand AcceptChangesCommand { get; set; }
         public ICommand CancelChangesCommand { get; set; }
+        #endregion
+
+        #region methods
 
         private void AddParticipantAsync()
         {
             ParticipantsList.Add(new Person());
             
+        }
+
+        private async Task NavigateBackAsync()
+        {
+            await _navigation.PopAsync();
         }
 
         private async Task GetBarbecue()
@@ -293,9 +307,6 @@ namespace TrincaChurras.ViewModels
             IsEditing = !IsEditing;
         }
 
-        private async Task NavigateBackAsync()
-        {
-            await _navigation.PopAsync();
-        }
+        #endregion
     }
 }

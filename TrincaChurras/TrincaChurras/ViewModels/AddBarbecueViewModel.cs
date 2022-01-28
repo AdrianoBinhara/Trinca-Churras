@@ -13,6 +13,7 @@ namespace TrincaChurras.ViewModels
 {
     public class AddBarbecueViewModel : BaseViewModel
     {
+        #region Properties
         protected INavigation _navigation;
         protected TrincaMiddleware trincaMiddleware = new TrincaMiddleware();
 
@@ -70,7 +71,9 @@ namespace TrincaChurras.ViewModels
         public string ChurrasId { get; private set; }
 
         private int id = 0;
+        #endregion
 
+        #region Contructor
         public AddBarbecueViewModel(INavigation navigation)
         {
             _navigation = navigation;
@@ -80,12 +83,16 @@ namespace TrincaChurras.ViewModels
             BackButtonCommand = new Command(async () => await BackButtonAsync());
             SaveParticipantCommand = new Command(() => SaveParticipantAsync());
         }
+        #endregion
 
+        #region Commands
         public ICommand AddPariticipantsCommand { get; set; }
         public ICommand BackButtonCommand { get; set; }
         public ICommand SelectedItemCommand { get; set; }
         public ICommand SaveParticipantCommand { get; set; }
+        #endregion
 
+        #region Methods
 
         private void AddParticipantAsync()
         {
@@ -153,5 +160,6 @@ namespace TrincaChurras.ViewModels
             
             IsBusy = !IsBusy;
         }
+        #endregion
     }
 }

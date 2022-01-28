@@ -8,7 +8,7 @@
     <ContentPage.Content>
         <Grid BackgroundColor="#F9F9F9">
             <Image BackgroundColor="#FFD935"
-                   Source="bbq-pattern.png"
+                   Source="bbq_pattern.png"
                    VerticalOptions="StartAndExpand"/>
             <Grid Margin="0,80"
                   VerticalOptions="Start">
