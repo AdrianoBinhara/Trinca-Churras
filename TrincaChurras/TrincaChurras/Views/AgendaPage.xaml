@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
+    x:Class="TrincaChurras.Views.AgendaPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    NavigationPage.HasNavigationBar="False"
-    x:Name="Agenda"
     xmlns:template="clr-namespace:TrincaChurras.Views.Templates"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    x:Class="TrincaChurras.Views.AgendaPage">
+    x:Name="Agenda"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <Style TargetType="template:AddBarbecue">
             <Setter Property="VisualStateManager.VisualStateGroups">
@@ -15,8 +15,7 @@
                         <VisualState x:Name="Normal" />
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor"
-                                        Value="White" />
+                                <Setter Property="BackgroundColor" Value="White" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -31,8 +30,7 @@
                         <VisualState x:Name="Normal" />
                         <VisualState x:Name="Selected">
                             <VisualState.Setters>
-                                <Setter Property="BackgroundColor"
-                                        Value="White" />
+                                <Setter Property="BackgroundColor" Value="White" />
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>
@@ -46,59 +44,74 @@
             </DataTemplate>
 
             <DataTemplate x:Key="AddBarbecueTemplate">
-                <template:AddBarbecue/>
+                <template:AddBarbecue />
             </DataTemplate>
 
-            <template:AgendaDataTemplateSelector x:Key="TemplateSelector"
-                                                 BarbecueTemplate="{StaticResource BarbecueTemplate}"
-                                                 AddBarbecueTemplate="{StaticResource AddBarbecueTemplate}"/>
+            <template:AgendaDataTemplateSelector
+                x:Key="TemplateSelector"
+                AddBarbecueTemplate="{StaticResource AddBarbecueTemplate}"
+                BarbecueTemplate="{StaticResource BarbecueTemplate}" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
-   <ContentPage.Content>
+    <ContentPage.Content>
         <Grid BackgroundColor="White">
-            <Image BackgroundColor="#FFD935" Source="bbq_pattern.png" VerticalOptions="StartAndExpand"/>
-             <Grid Margin="0,80"
-                  VerticalOptions="Start">
+            <Image
+                BackgroundColor="#FFD935"
+                Source="bbq_pattern.png"
+                VerticalOptions="StartAndExpand" />
+            <Grid Margin="0,80" VerticalOptions="Start">
 
-                <Label HorizontalOptions="CenterAndExpand"
-                       Text="Agenda de Churras"
-                       FontSize="Subtitle"
-                       VerticalTextAlignment="Center"
-                       TextColor="Black" FontFamily="RalewayBold"/>
+                <Label
+                    FontFamily="RalewayBold"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Agenda de Churras"
+                    TextColor="Black"
+                    VerticalTextAlignment="Center">
+                    <Label.FontSize>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="25"
+                            iOS="20" />
+                    </Label.FontSize>
+                </Label>
                 <ActivityIndicator
-                        x:Name="actv"
-                        Margin="0,0,20,0"
+                    x:Name="actv"
+                    Margin="0,0,20,0"
                     HorizontalOptions="EndAndExpand"
-                        IsVisible="{Binding IsBusy}"
-                        IsRunning="{Binding IsBusy}"/>   
+                    IsRunning="{Binding IsBusy}"
+                    IsVisible="{Binding IsBusy}"
+                    Color="Black" />
             </Grid>
-            
 
-            <CollectionView x:Name="collectionBarb"
-                            Margin="0,160"
-                            SelectionMode="Single"
-                            HorizontalScrollBarVisibility="Never"
-                            HeightRequest="350"
-                            SelectionChangedCommand="{Binding SelectedChurrasCommand}"
-                            SelectionChangedCommandParameter="{x:Reference collectionBarb}"
-                            ItemsSource="{Binding ListaAgenda}"
-                            VerticalOptions="Start"
-                            ItemTemplate="{StaticResource TemplateSelector}"
-                            HorizontalOptions="Center">
+
+            <CollectionView
+                x:Name="collectionBarb"
+                Margin="0,160"
+                HeightRequest="350"
+                HorizontalOptions="Center"
+                HorizontalScrollBarVisibility="Never"
+                ItemTemplate="{StaticResource TemplateSelector}"
+                ItemsSource="{Binding ListaAgenda}"
+                SelectionChangedCommand="{Binding SelectedChurrasCommand}"
+                SelectionChangedCommandParameter="{x:Reference collectionBarb}"
+                SelectionMode="Single"
+                VerticalOptions="Start">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Horizontal"
-                                     VerticalItemSpacing="0"
-                                     HorizontalItemSpacing="10"
-                                     SnapPointsType="Mandatory"
-                                     Span="2"/>
-                </CollectionView.ItemsLayout>   
+                    <GridItemsLayout
+                        HorizontalItemSpacing="10"
+                        Orientation="Horizontal"
+                        SnapPointsType="Mandatory"
+                        Span="2"
+                        VerticalItemSpacing="0" />
+                </CollectionView.ItemsLayout>
             </CollectionView>
-             
-            <Image Source="trinca.png"
-                   VerticalOptions="End"
-                   Margin="0,0,0,90"/>
-            
+
+            <Image
+                Margin="0,0,0,90"
+                Source="trinca.png"
+                VerticalOptions="End" />
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
