@@ -1,59 +1,68 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <Grid
+    x:Class="TrincaChurras.Views.Templates.AgendaList"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-    x:Class="TrincaChurras.Views.Templates.AgendaList"
     Padding="0,0,0,25"
     BackgroundColor="Transparent">
-   <pancake:PancakeView>
+    <pancake:PancakeView Margin="13,0,0,0" Padding="1">
         <pancake:PancakeView.Shadow>
-            <pancake:DropShadow Color="Black"
-                                Offset="10,7"
-                                Opacity=".1"
-                                BlurRadius="8"/>
+            <pancake:DropShadow
+                BlurRadius="10"
+                Opacity=".1"
+                Offset="10,10"
+                Color="Black" />
         </pancake:PancakeView.Shadow>
-        <StackLayout Margin="13,0,0,0"
-                     VerticalOptions="Center"
-                     HeightRequest="120"
-                     WidthRequest="150"
-                     BackgroundColor="White"
-                     Padding="10">
-            <Label Text="{Binding Date, Converter={StaticResource DataConverter}}"
-                   TextColor="Black"
-                   FontSize="Subtitle"
-                   FontFamily="RalewayBold"/>
-            <Label Text="{Binding Title}"
-                   TextColor="Black"
-                   FontFamily="RalewayBold"/>
-            <StackLayout Orientation="Horizontal"
-                         Margin="0,0,0,10"
-                         VerticalOptions="EndAndExpand"
-                         BackgroundColor="Transparent">
-                <StackLayout Orientation="Horizontal"
-                             Spacing="10"
-                             HorizontalOptions="FillAndExpand"
-                             BackgroundColor="Transparent">
-                    <Image Source="icon_people.png"
-                           HorizontalOptions="Start"
-                           HeightRequest="15"/>
-                    <Label Text="{Binding Participants_count}"
-                           TextColor="Black"
-                           FontSize="Medium"
-                           HorizontalOptions="StartAndExpand"
-                           VerticalTextAlignment="Start"
-                           FontFamily="RalewayRegular"/>
-              
-                    <Image Source="icon_money.png"
-                           HorizontalOptions="End"
-                           HeightRequest="15"/>
-                    <Label Text="{Binding TotalValue}"
-                           TextColor="Black"
-                           FontSize="Medium"
-                           VerticalTextAlignment="Start"
-                           FontFamily="RalewayRegular"/>
+        <StackLayout
+            Padding="10"
+            BackgroundColor="White"
+            HeightRequest="120"
+            VerticalOptions="Center"
+            WidthRequest="150">
+            <Label
+                FontFamily="RalewayBold"
+                FontSize="Subtitle"
+                Text="{Binding Date, Converter={StaticResource DataConverter}}"
+                TextColor="Black" />
+            <Label
+                FontFamily="RalewayBold"
+                Text="{Binding Title}"
+                TextColor="Black" />
+            <StackLayout
+                Margin="0,0,0,10"
+                BackgroundColor="Transparent"
+                Orientation="Horizontal"
+                VerticalOptions="EndAndExpand">
+                <StackLayout
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <Image
+                        HeightRequest="15"
+                        HorizontalOptions="Start"
+                        Source="icon_people.png" />
+                    <Label
+                        FontFamily="RalewayRegular"
+                        FontSize="Medium"
+                        HorizontalOptions="StartAndExpand"
+                        Text="{Binding Participants_count}"
+                        TextColor="Black"
+                        VerticalTextAlignment="Start" />
+
+                    <Image
+                        HeightRequest="15"
+                        HorizontalOptions="End"
+                        Source="icon_money.png" />
+                    <Label
+                        FontFamily="RalewayRegular"
+                        FontSize="Medium"
+                        Text="{Binding TotalValue}"
+                        TextColor="Black"
+                        VerticalTextAlignment="Start" />
                 </StackLayout>
             </StackLayout>
         </StackLayout>
-   </pancake:PancakeView>
+    </pancake:PancakeView>
 </Grid>

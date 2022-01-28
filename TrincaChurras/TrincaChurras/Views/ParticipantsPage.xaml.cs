@@ -109,7 +109,6 @@ namespace TrincaChurras.Views
             {
                 await CloseDrawer();
             });
-            isBackdropEnabled = false;
         }
 
     }
