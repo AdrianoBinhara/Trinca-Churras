@@ -283,7 +283,7 @@ namespace TrincaChurras.ViewModels
                 Title = NewTitle ?? Churras.Title,
                 Description = " ",
                 Date = NewDate.ToString("yyyy-MM-dd"),
-                Value_per_person = NewTotalValue
+                Value_per_person = NewTotalValue == 0 ? 1: NewTotalValue
 
             };
             var response = await trincaMiddleware.PutBarbcue(churras, token);

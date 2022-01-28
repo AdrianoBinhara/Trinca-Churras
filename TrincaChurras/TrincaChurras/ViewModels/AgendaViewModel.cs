@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TrincaChurras.Interfaces;
@@ -68,7 +69,7 @@ namespace TrincaChurras.ViewModels
             var token = await SecureStorage.GetAsync("token");
             var response = await trincaMiddleware.GetBarbecue(token);
 
-            ListaAgenda = new ObservableCollection<Barbecue>(response.Data);
+            ListaAgenda = new ObservableCollection<Barbecue>(response.Data.OrderBy(x=>x.Date));
             ListaAgenda.Insert(ListaAgenda.Count,new Barbecue { Title = "Adicionar Churras", Image = "icon_bbq.png", });
 
             IsBusy = !IsBusy;

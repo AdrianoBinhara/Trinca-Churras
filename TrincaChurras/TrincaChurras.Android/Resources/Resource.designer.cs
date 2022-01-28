@@ -16475,37 +16475,34 @@ namespace TrincaChurras.Droid
 			public const int secondary_text_disabled_material_light = 2131034310;
 			
 			// aapt resource value: 0x7F0500C7
-			public const int splash_background = 2131034311;
+			public const int switch_thumb_disabled_material_dark = 2131034311;
 			
 			// aapt resource value: 0x7F0500C8
-			public const int switch_thumb_disabled_material_dark = 2131034312;
+			public const int switch_thumb_disabled_material_light = 2131034312;
 			
 			// aapt resource value: 0x7F0500C9
-			public const int switch_thumb_disabled_material_light = 2131034313;
+			public const int switch_thumb_material_dark = 2131034313;
 			
 			// aapt resource value: 0x7F0500CA
-			public const int switch_thumb_material_dark = 2131034314;
+			public const int switch_thumb_material_light = 2131034314;
 			
 			// aapt resource value: 0x7F0500CB
-			public const int switch_thumb_material_light = 2131034315;
+			public const int switch_thumb_normal_material_dark = 2131034315;
 			
 			// aapt resource value: 0x7F0500CC
-			public const int switch_thumb_normal_material_dark = 2131034316;
+			public const int switch_thumb_normal_material_light = 2131034316;
 			
 			// aapt resource value: 0x7F0500CD
-			public const int switch_thumb_normal_material_light = 2131034317;
+			public const int test_mtrl_calendar_day = 2131034317;
 			
 			// aapt resource value: 0x7F0500CE
-			public const int test_mtrl_calendar_day = 2131034318;
+			public const int test_mtrl_calendar_day_selected = 2131034318;
 			
 			// aapt resource value: 0x7F0500CF
-			public const int test_mtrl_calendar_day_selected = 2131034319;
+			public const int tooltip_background_dark = 2131034319;
 			
 			// aapt resource value: 0x7F0500D0
-			public const int tooltip_background_dark = 2131034320;
-			
-			// aapt resource value: 0x7F0500D1
-			public const int tooltip_background_light = 2131034321;
+			public const int tooltip_background_light = 2131034320;
 			
 			static Color()
 			{
@@ -18007,22 +18004,16 @@ namespace TrincaChurras.Droid
 			public const int roundedbgdark = 2131165333;
 			
 			// aapt resource value: 0x7F070096
-			public const int splash = 2131165334;
+			public const int test_custom_background = 2131165334;
 			
 			// aapt resource value: 0x7F070097
-			public const int test_custom_background = 2131165335;
+			public const int tooltip_frame_dark = 2131165335;
 			
 			// aapt resource value: 0x7F070098
-			public const int tooltip_frame_dark = 2131165336;
+			public const int tooltip_frame_light = 2131165336;
 			
 			// aapt resource value: 0x7F070099
-			public const int tooltip_frame_light = 2131165337;
-			
-			// aapt resource value: 0x7F07009A
-			public const int trinca = 2131165338;
-			
-			// aapt resource value: 0x7F07009B
-			public const int trincaIcon = 2131165339;
+			public const int trinca = 2131165337;
 			
 			static Drawable()
 			{
@@ -19516,15 +19507,6 @@ namespace TrincaChurras.Droid
 			
 			// aapt resource value: 0x7F0C0002
 			public const int launcher_foreground = 2131492866;
-			
-			// aapt resource value: 0x7F0C0003
-			public const int trinca_icon = 2131492867;
-			
-			// aapt resource value: 0x7F0C0004
-			public const int trinca_icon_adaptive_back = 2131492868;
-			
-			// aapt resource value: 0x7F0C0005
-			public const int trinca_icon_adaptive_fore = 2131492869;
 			
 			static Mipmap()
 			{
