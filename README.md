@@ -1,4 +1,4 @@
-# Trinca Churras 🍻
+# Churras 🍻
 ---
 Aplicativo criado para marcar um churras de respeito com a galera 🍗
 
